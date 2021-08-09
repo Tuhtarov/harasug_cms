@@ -12,7 +12,7 @@
         <div class="content-body">
             <div class="wrapper">
                 @if($page->title == "Кафе")
-                    @include('adfm.layouts.main.cafe_tabs')
+                    @include('adfm.components.cafe_tabs')
                 @elseif($page->title == "Отдых" || $page->title == "Галерея" || $page->title == "Новости")
                     @include('adfm.layouts.listviews.content_items_blog')
                 @elseif($page->title == "Бронирование")

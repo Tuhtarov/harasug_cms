@@ -64,7 +64,7 @@ $basic_dark: #4d4d4d;
             &.witch-image {
                 padding: 10px 0 0;
                 .menu-section {
-                    margin-top: 30px;
+                    margin-top: 50px;
                 }
             }
             &.active {
@@ -112,6 +112,7 @@ $basic_dark: #4d4d4d;
     }
     &-items {
         display: flex;
+        width: 100%;
         flex-wrap: wrap;
         &.last-items-border-none > .menu-section-item {
             &:nth-last-child(2) {
