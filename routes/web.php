@@ -14,8 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 require_once 'adfm/public-routes.php';
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 //Route::post('message', 'App\Http\Controllers\Admin\FeedbackController@store')->name('adfm.feedbacks.store')->middleware('web');

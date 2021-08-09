@@ -8,7 +8,7 @@
   font-family: inherit;
 }
 .primary-control-select, .primary-control-datepicker, .primary-control-items, .primary-control-datepicker-body {
-  box-shadow: 0 0 6px black;
+  box-shadow: 0px 0px 6px black;
 }
 .primary-control-select, .primary-control-datepicker {
   position: relative;
@@ -21,7 +21,7 @@
   border: 1px solid #ff9d00;
   background-color: white;
   cursor: pointer;
-  /*appearance: textfield;*/
+  appearance: textfield;
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
 }
@@ -142,7 +142,6 @@ label {
 }
 
 a {
-  color: inherit;
   font-family: inherit !important;
   font-weight: 500;
   text-decoration: none;
@@ -341,6 +340,7 @@ select {
   top: 2em;
   left: -3px;
   right: 0;
+  min-width: 50px;
   z-index: 3;
   pointer-events: none;
   opacity: 0;
@@ -463,10 +463,6 @@ select {
   }
 }
 @media screen and (max-width: 768px) {
-  .wrapper {
-    max-width: 690px;
-  }
-
   .header .header-body .header-body-navigation {
     position: relative;
     padding: 0 0 40px;
@@ -573,6 +569,26 @@ select {
   }
   .header .header-navigation-mobile-burger {
     left: -20px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .primary-control {
+    width: 100%;
+  }
+
+  .primary-control-select, .primary-control-datepicker {
+    min-width: auto;
+    width: calc(100% / 1 - 1.6em) !important;
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 992px) {
+  .primary-control {
+    width: calc(100% / 2);
+  }
+
+  .primary-control-select, .primary-control-datepicker {
+    min-width: auto;
+    width: calc(100% - 1.6em) !important;
   }
 }
 

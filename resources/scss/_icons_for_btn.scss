@@ -1,0 +1,34 @@
+.social-icon {
+    position: relative;
+    height: 30px;
+    width: 30px;
+}
+
+.social-icon.vk {
+    background: url("../img/icon/vkontakte.svg") center no-repeat;
+}
+.social-icon.vk-sm {
+    background: url("../img/icon/vk_small.svg") center no-repeat;
+}
+.social-icon.inst {
+    background: url("../img/icon/instagram.svg") center no-repeat;
+}
+.social-icon.youtube {
+    background: url("../img/icon/youtube.svg") center no-repeat;
+    height: 21px;
+}
+
+//для кнопок подписаться в секции "Подписывайтесь на наши соцсети"
+.subscribe-item-btn {
+    position: relative;
+    .social-icon {
+        position: absolute;
+        top: 50%;
+        left: 18px;
+        transform: translate(0, -50%);
+        height: 14px;
+        width: 14px;
+        display: block;
+        background-size: contain;
+    }
+}

@@ -1,0 +1,344 @@
+@import "title_decoration";
+@import "around_picture";
+$basic_yellow: #ffb236;
+$basic_dark: #4d4d4d;
+
+.cafe {
+    &-tabs {
+        &-target {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px auto;
+            &-link {
+                border: 1px solid $basic_yellow;
+                border-radius: 5px;
+                color: black;
+                padding: 10px 40px;
+                cursor: pointer !important;
+                margin: 10px;
+                &:focus {
+                    opacity: inherit;
+                    box-shadow: 3px 3px 9px #ccc;
+                }
+            }
+            &-link.active {
+                background: $basic_yellow;
+            }
+        }
+        &-block {
+            display: none;
+            flex-direction: column;
+            padding: 90px 0 0;
+            &-info {
+                position: relative;
+                align-self: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                height: 445px;
+                width: 775px;
+                max-height: 445px;
+                max-width: 750px;
+                overflow: hidden;
+                border-radius: 0 50px 0 50px;
+
+                img {
+                    object-fit: cover;
+                    object-position: center;
+                    height: 100%;
+                    width: 100%;
+                }
+
+                &-text {
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    color: white!important;
+                    background: #145d6b;
+                    opacity: 0.7;
+                    padding: 15px 30px;
+                    bottom: 0;
+                }
+            }
+            &.witch-image {
+                padding: 10px 0 0;
+                .menu-section {
+                    margin-top: 30px;
+                }
+            }
+            &.active {
+                display: flex;
+            }
+        }
+    }
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+
+    &:not(:first-child) {
+        margin-top: 90px;
+    }
+    &:last-child {
+        border-bottom: 0;
+    }
+
+    * {
+        color: $basic_dark;
+    }
+
+    &-title {
+        text-transform: uppercase;
+        font-size: 28px;
+        border-bottom: 1px dashed $basic_yellow;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+    &-image {
+        position: absolute;
+        top: -12%;
+        left: 50%;
+        transform: translate(-50%);
+        img {
+            height: auto;
+            width: 200px;
+        }
+    }
+    &-items {
+        display: flex;
+        flex-wrap: wrap;
+        &.last-items-border-none > .menu-section-item {
+            &:nth-last-child(2) {
+                border-bottom: 0!important;
+            }
+        }
+    }
+    &-item {
+        display: flex;
+        justify-content: space-between;
+        max-width: 50%;
+        width: 100%;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed black;
+
+        &:nth-child(even) {
+            padding-left: 100px;
+        }
+        &:nth-child(odd) {
+            border-right: 1px dashed black;
+            padding-right: 100px;
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &-block {
+            &-desc {
+                flex-basis: 70%;
+                &-title {
+                    font-size: 18px;
+                    line-height: 22px;
+                    margin: 0 0 3px;
+                }
+                &-text {
+                    margin-bottom: 10px;
+                }
+            }
+            &-price {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                flex-basis: 30%;
+                &-value {
+                    font-size: 18px;
+                    font-weight: bold;
+                    white-space: nowrap;
+                    &::after {
+                        content: " " attr(data-currency);
+                    }
+                }
+                &-weight {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .cafe {
+        &-tabs {
+            &-block {
+                padding: 40px 0 0;
+                &-info {
+                    height: auto;
+                    width: auto;
+                    border-radius: 0 40px 0 40px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+    .menu-section {
+        &:not(:first-child) {
+            margin-top: 50px;
+        }
+        &-item {
+            &:nth-child(even) {
+                padding-left: 10px;
+            }
+            &:nth-child(odd) {
+                padding-right: 10px;
+            }
+        }
+        &-image {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .cafe {
+        &-title {
+            font-size: 26px;
+            padding-bottom: 5px;
+            &::after {
+                width: 200px;
+            }
+        }
+        &-tabs-block {
+            padding: 30px 0 20px;
+        }
+    }
+    .menu-section {
+        &:not(:first-child) {
+            margin-top: 30px;
+        }
+        &-title {
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+        &-item {
+            &-title {
+                font-size: 16px;
+                line-height: 18px;
+            }
+            &-block {
+                &-desc {
+                    &-title {
+                        font-size: 16px;
+                        line-height: 18px;
+                    }
+                    &-text {
+                        font-size: 14px;
+                    }
+                }
+                &-price {
+                    &-value {
+                        font-size: 14px;
+                    }
+                    &-weight {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .cafe {
+        &-title {
+            font-size: 26px;
+            padding-bottom: 5px;
+            &::after {
+                width: 200px;
+            }
+        }
+        &-tabs {
+            &-target-link {
+                font-size: 14px;
+            }
+            &-block-info-text {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    }
+    .menu-section {
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+        &-title {
+            font-size: 18px;
+            text-align: center;
+            margin: 0 auto 10px;
+        }
+        &-item {
+            flex-direction: column;
+            justify-content: stretch;
+            &-block {
+                &-desc {
+                    flex-basis: 100%;
+                    &-title {
+                        font-size: 14px;
+                    }
+                }
+                &-price {
+                    align-items: flex-start;
+                    flex-basis: 100%;
+                    &-value {
+                        margin-top: auto;
+                        font-size: 14px;
+                    }
+                    &-weight {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .menu-section {
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+        &-title {
+            font-size: 18px;
+        }
+        &-item {
+            max-width: 100%;
+            padding: 7px 0!important;
+            border-right: 0!important;
+
+            &-block {
+                &-desc {
+                    flex-basis: 100%;
+                    &-title {
+                        font-size: 14px;
+                    }
+                }
+                &-price {
+                    align-items: flex-start;
+                    flex-basis: 100%;
+                    &-value {
+                        margin-top: auto;
+                        font-size: 14px;
+                    }
+                    &-weight {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}

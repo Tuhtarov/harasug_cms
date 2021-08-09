@@ -1,0 +1,69 @@
+/* Важно! Картинки отображаются только на средних и выше размеров экрана.
+(Скрываются media запросом )*/
+%parent-core {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 100%;
+    background-size: 100% auto!important;
+    background-position: center!important;
+    background-repeat: repeat-y!important;
+}
+
+/* Контейнер для объекта thumbnails*/
+.thumb-container {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    max-width: 1920px;
+    width: 100%;
+    height: 100%;
+    .thumbnails, .thumbnails::after, .thumbnails::before {
+        display: none;
+    }
+}
+
+/* родитель, в котором содержатся: 2 псевдоэлемента, которые и отвечают за отображение
+картинок по бокам */
+.thumbnails {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.thumbnails::after, .thumbnails::before {
+    @extend %parent-core;
+}
+
+.thumbnails::before {
+    left: 15px;
+}
+
+.thumbnails::after {
+    right: 15px;
+}
+
+/* вариации картинок */
+.thumbnails.part-1 {
+    &::before {
+        background:url('../img/bg/bg-thumbnails/decor_picture_left.svg');
+    }
+    &::after {
+        background:url('../img/bg/bg-thumbnails/decor_picture_right.svg');
+    }
+}
+.thumbnails.part-2 {
+    &::before {
+        background:url('../img/bg/bg-thumbnails/decor_picture_left_small.svg');
+    }
+    &::after {
+        background:url('../img/bg/bg-thumbnails/decor_picture_right_small.svg');
+    }
+}
+
+@media (min-width: 1560px) {
+    .thumb-container, .thumbnails, .thumbnails::after, .thumbnails::before {
+        display: block!important;
+    }
+}

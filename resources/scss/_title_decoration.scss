@@ -1,0 +1,25 @@
+$basic_green_light: #4f8757;
+
+.title-decoration {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: $basic_green_light;
+    margin-top: 75px;
+    margin-bottom: 60px;
+    padding-bottom: 0.2em;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -60%;
+        background-image: url("../img/wawe/wawe_under_text.png");
+        background-repeat: repeat-x;
+        background-size: auto 14px;
+        background-position: center;
+        width: 340px;
+        height: 18px;
+    }
+}

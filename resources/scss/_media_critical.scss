@@ -1,0 +1,170 @@
+@media (max-width: 1200px) {
+    //размеры контейнера аолны в шапке - 63px х 100%
+    .header {
+        .header-background::after {
+            background-size: cover;
+        }
+    }
+}
+@media (min-width: 1200px) {
+    //размеры контейнера аолны в шапке - 63px х 100%
+    .header {
+        .header-background::after {
+            background-size: 100% 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header {
+        .header-navigation {
+            margin-top: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    //HEADER
+    .header {
+        .header-body {
+            .header-body-navigation {
+                position: relative;
+                padding: 0 0 40px;
+                //минус две строки и хедера на всю высоту не будет
+                height: 100%;
+                min-height: 100vh;
+            }
+        }
+
+        .header-info-bar {
+            flex-direction: column;
+            align-items: flex-end;
+            flex-basis: auto;
+            flex-grow: 1;
+            padding: 20px 15px 0;
+            margin: 0;
+            width: auto;
+
+            .bar-tel-items {
+                flex-direction: column;
+                align-items: flex-end;
+                margin: 0;
+                li {
+                    margin: 5px 0 0;
+                    &:first-child {
+                        margin: 0;
+                    }
+                    &:last-child {
+                        margin: 5px 0 0;
+                    }
+                }
+            }
+
+            .bar-user-menu {
+                flex-direction: column;
+                align-items: flex-end;
+
+                .bar-btn-phone-order {
+                    order: 0;
+                    margin: 15px 0 10px;
+                }
+
+                p.bar-info {
+                    order: 1;
+                    margin: 0 !important;
+                }
+            }
+        }
+
+        .header-form {
+            padding: 30px 0 0;
+            .primary-form {
+                .primary-field {
+                    margin: 5px;
+                    width: 40%;
+                }
+            }
+            .primary-btn {
+                min-width: 180px;
+                width: 45%;
+            }
+        }
+        .header-navigation {
+            margin: 20px 20px 25px;
+
+            .header-navigation-main-wrapper {
+                position: absolute;
+                top: 3px;
+                left: 60px;
+
+                .header-navigation-list {
+                    display: none;
+                }
+
+                .header-navigation-mobile-burger {
+                    display: block;
+                }
+            }
+        }
+        .header-about {
+            .header-logo-container {
+                margin: 20px 0 20px;
+                img {
+                    height: 120px;
+                    width: 120px;
+                }
+            }
+            .header-about-title {
+                font-size: 30px;
+            }
+            .header-about-text {
+                p {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+
+    .header-background {
+        z-index: 0;
+    }
+
+    .main {
+        .main-body {
+            section.section-house {
+                padding: 10px 0 100px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .header {
+        .header-body {
+            &-navigation {
+                .header-info-bar {
+                    padding: 10px 10px 0 0;
+                    a,
+                    p {
+                        font-size: 14px !important;
+                    }
+                }
+                .bar-user-menu {
+                    margin: 5px 0 0 5px;
+                }
+            }
+            &-main {
+                .header-about {
+                    h1 {
+                        font-size: 24px;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+        .header-navigation-mobile-burger {
+            left: -20px;
+        }
+    }
+}

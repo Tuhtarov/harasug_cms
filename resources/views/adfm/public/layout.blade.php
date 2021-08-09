@@ -7,8 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@section('meta-title')@show</title>
     <meta name="description" content="@section('meta-description')@show">
-    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/critical.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/main.css')}}">
+{{--    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/critical.css')}}">--}}
+{{--    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/main.css')}}">--}}
+    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/app.css')}}">
 </head>
 <body class="page">
 
@@ -39,9 +40,6 @@
         document.body.appendChild(link)
     }
     load('{{asset('dist/css/lib/mmenu-light.css')}}')
-    @if($page->title == "Кафе")
-    load('{{asset('dist/css/cafe.css')}}')
-    @endif
 </script>
 
 {{--Включение табов на странице кафе--}}

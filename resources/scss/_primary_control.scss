@@ -1,0 +1,138 @@
+.primary-control {
+  font-size: 14px;
+  position: relative;
+  font-family: inherit;
+
+  $basic_yellow: #ff9d00;
+
+  &-select,
+  &-datepicker,
+  &-items,
+  &-datepicker-body {
+    box-shadow: 0px 0px 6px black;
+  }
+
+  &-select {
+    position: relative;
+    display: inline-block;
+    font-size: inherit;
+    min-width: 200px;
+    min-height: 43px;
+    padding: 0.9em 0.9em 0.9em 2.3em;
+    margin: 0.8em;
+    border: 1px solid $basic_yellow;
+    background-color: white;
+    cursor: pointer;
+
+    appearance: textfield;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      height: 12px;
+      right: 22px;
+      width: 3px;
+      background: #000;
+      top: 50%;
+      transition: transform 0.35s;
+      transform: translate(0, -50%);
+    }
+    &::after {
+      transform: translate(0, -50%) rotate(45deg);
+      right: 15px;
+    }
+    &::before {
+      transform: translate(0, -50%) rotate(-45deg);
+    }
+  }
+
+  &-datepicker {
+    @extend .primary-control-select;
+    &::after,
+    &::before {
+      display: none;
+    }
+    &-body {
+      position: absolute;
+      display: none;
+      z-index: 100;
+      top: 3.7em;
+      left: 0.8em;
+      right: 0.8em;
+      // left: 50%;
+      // transform: translate(-50%, 0);
+      width: calc(100% - 1.6em);
+      border: 1px solid #ff9d00;
+      min-height: 150px;
+      box-shadow: 1px 1px 6px gray;
+      background: white;
+    }
+    &:focus,
+    &:hover ~ &-body {
+      outline: 1px solid $basic_yellow;
+    }
+  }
+
+  &-items {
+    position: absolute;
+    z-index: 100;
+    top: 4em;
+    left: 0.8em;
+    right: 0.8em;
+
+    width: calc(100% - 1.6em);
+    border: 1px solid #ff9d00;
+    border-top: 1px solid black;
+
+    font-size: inherit;
+    background: white;
+    color: black;
+
+    display: none;
+    li {
+      padding: 0.6em 0.4em;
+      transition: border 0.3s;
+      &.current {
+        background: rgb(221, 221, 221) !important;
+        cursor: unset !important;
+      }
+      &:hover {
+        cursor: pointer;
+        background: #b2ecfb;
+      }
+    }
+  }
+  &-items > &-item::before {
+    content: attr(data-before) " ";
+  }
+
+  &-control:checked ~ .primary-control-select {
+    &::after {
+      transform: translate(0, -50%) rotate(-45deg) rotateY(180deg);
+    }
+    &::before {
+      transform: translate(0, -50%) rotate(45deg) rotateY(180deg);
+    }
+    outline: 1px solid $basic_yellow;
+  }
+
+  &-control:checked ~ &-items {
+    display: block;
+    outline: 1px solid $basic_yellow;
+  }
+
+  &-control:checked ~ &-datepicker-body {
+    display: block;
+    outline: 1px solid $basic_yellow;
+  }
+
+  &-control:focus,
+  &-control:hover ~ &-select,
+  &-items {
+    outline: 1px solid $basic_yellow;
+  }
+}

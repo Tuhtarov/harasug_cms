@@ -1,4 +1,4 @@
-<div class="section-feedback-body-slider">
+<div class="content-slider">
     <div class="slider" style="overflow: hidden;">
         <ul class="slider-content">
             <li class="slider-item">
