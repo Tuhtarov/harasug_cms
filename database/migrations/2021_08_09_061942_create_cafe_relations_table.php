@@ -14,10 +14,11 @@ class CreateCafeRelationsTable extends Migration
     public function up()
     {
         Schema::create('cafe_relations', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedInteger('cafe_record_id')->unique();
             $table->unsignedInteger('cafe_category_id');
             $table->unsignedInteger('cafe_type_id');
+            $table->softDeletes();
         });
     }
 

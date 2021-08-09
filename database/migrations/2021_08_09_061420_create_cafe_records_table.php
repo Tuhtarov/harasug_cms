@@ -14,7 +14,7 @@ class CreateCafeRecordsTable extends Migration
     public function up()
     {
         Schema::create('cafe_records', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('weight')->nullable();
