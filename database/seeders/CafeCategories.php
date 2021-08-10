@@ -14,13 +14,25 @@ class CafeCategories extends Seeder
      */
     public function run()
     {
-        $categories = [];
-
-        for ($i = 0; $i < 5; $i++) {
-            $categories[] = [
-                'name' => "Категория $i"
-            ];
-        }
-        DB::table('cafe_categories')->insert($categories);
+        DB::table('cafe_categories')->insert([
+            'name' => "Завтраки",
+            'image' => null,
+            'cafe_type_id' => 1
+        ]);
+        DB::table('cafe_categories')->insert([
+            'name' => "Эчпочмаки",
+            'image' => null,
+            'cafe_type_id' => 2
+        ]);
+        DB::table('cafe_categories')->insert([
+            'name' => "Горячее",
+            'image' => null,
+            'cafe_type_id' => 1
+        ]);
+        DB::table('cafe_categories')->insert([
+            'name' => "Мясное",
+            'image' => null,
+            'cafe_type_id' => 2
+        ]);
     }
 }

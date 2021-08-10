@@ -146,7 +146,7 @@ $basic_dark: #4d4d4d;
                 &-title {
                     font-size: 18px;
                     line-height: 22px;
-                    margin: 0 0 3px;
+                    margin: 0 0 6px;
                 }
                 &-text {
                     margin-bottom: 10px;
@@ -166,10 +166,15 @@ $basic_dark: #4d4d4d;
                     }
                 }
                 &-weight {
+                    margin-top: 6px;
                     font-size: 14px;
                 }
             }
         }
+    }
+
+    &.no-category-image {
+        margin-top: -25px;
     }
 }
 

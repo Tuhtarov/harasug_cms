@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Contracts\Cafe\CafeInterface;
 use App\Helpers\Adfm\Dev;
 use App\Models\Adfm\File;
 use App\Models\Adfm\Product;
@@ -34,6 +35,8 @@ class PageController extends Controller
         $page = Page::where('slug', '=', $slug)->firstOrFail();
         return view('adfm::public.page', compact('page'));
     }
+
+
 
     /* TODO Через этот метод нужно представлять конкретный блог конкретной страницы */
     public function showPageWith($pageSlug, $blogSlug)

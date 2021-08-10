@@ -17,6 +17,7 @@ class CreateCafeCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image')->nullable();
+            $table->unsignedInteger('cafe_type_id');
             $table->softDeletes();
         });
     }

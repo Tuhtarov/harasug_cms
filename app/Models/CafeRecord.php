@@ -13,4 +13,9 @@ class CafeRecord extends Model
 
     protected $table = 'cafe_records';
     protected $guarded = false;
+
+    public function cafe_category()
+    {
+        return $this->belongsTo(CafeCategory::class, 'cafe_category_id', 'id');
+    }
 }

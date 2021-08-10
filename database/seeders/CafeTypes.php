@@ -14,13 +14,14 @@ class CafeTypes extends Seeder
      */
     public function run()
     {
-        $types = [];
-
-        for ($i = 0; $i < 5; $i++) {
-            $types[] = [
-                'name' => "Кухня $i"
-            ];
-        }
-        DB::table('cafe_types')->insert($types);
+        DB::table('cafe_types')->insert([
+            'name' => "Европейская кухня",
+            'image' => null
+        ]);
+        DB::table('cafe_types')->insert([
+            'name' => "Национальная кухня",
+            'message' => "Национальные блюда хакасской кухни готовим по предварительным заказам",
+            'image' => null
+        ]);
     }
 }

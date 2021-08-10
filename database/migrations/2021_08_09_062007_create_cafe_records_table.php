@@ -19,6 +19,7 @@ class CreateCafeRecordsTable extends Migration
             $table->string('description')->nullable();
             $table->string('weight')->nullable();
             $table->smallInteger('price')->nullable();
+            $table->unsignedInteger('cafe_category_id');
             $table->softDeletes();
         });
     }

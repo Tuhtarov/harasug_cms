@@ -15,10 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CafeCategories::class,
             CafeTypes::class,
-            CafeRecords::class,
-            CafeRelations::class
+            CafeCategories::class,
+            CafeRecords::class
         ]);
     }
 }
