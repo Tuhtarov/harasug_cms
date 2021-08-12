@@ -8,8 +8,8 @@
     <title>@section('meta-title')@show</title>
     <meta name="description" content="@section('meta-description')@show">
 {{--    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/critical.css')}}">--}}
-{{--    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/main.css')}}">--}}
     <link type="text/css" rel="stylesheet" href="{{asset('dist/css/app.css')}}">
+{{--    <link type="text/css" rel="stylesheet" href="{{asset('dist/css/app.css')}}">--}}
 </head>
 <body class="page">
 
@@ -39,11 +39,11 @@
         link.type = 'text/css'
         document.body.appendChild(link)
     }
-    load('{{asset('dist/css/lib/mmenu-light.css')}}')
+    load('{{asset('dist/css/mmenu-light.css')}}')
 </script>
 
 {{--Включение табов на странице кафе--}}
-@if($page->title === "Кафе")
+@if($page->slug == "cafe")
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.cafe-tabs-target-link').forEach((item) =>

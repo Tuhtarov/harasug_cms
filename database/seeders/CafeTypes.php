@@ -15,13 +15,11 @@ class CafeTypes extends Seeder
     public function run()
     {
         DB::table('cafe_types')->insert([
-            'name' => "Европейская кухня",
-            'image' => null
+            'name' => "Европейская кухня"
         ]);
         DB::table('cafe_types')->insert([
             'name' => "Национальная кухня",
-            'message' => "Национальные блюда хакасской кухни готовим по предварительным заказам",
-            'image' => null
+            'message' => "Национальные блюда хакасской кухни готовим по предварительным заказам"
         ]);
     }
 }

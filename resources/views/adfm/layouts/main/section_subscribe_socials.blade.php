@@ -1,4 +1,4 @@
-<section class="section-subscribe second-theme">
+<section class="section-subscribe @if($_SERVER['REQUEST_URI'] != '/'){{'second-theme'}}@endif">
     <span class="thumb-container">
         <span class="thumbnails part-2">
         </span>

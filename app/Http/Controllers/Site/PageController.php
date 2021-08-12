@@ -2,46 +2,56 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Contracts\Cafe\CafeInterface;
-use App\Helpers\Adfm\Dev;
+use App\Contracts\Index\AboutCardsInterface;
+use App\Contracts\Index\HomesInterface;
+use App\Contracts\Index\QuestionsAnswerInterface;
 use App\Models\Adfm\File;
 use App\Models\Adfm\Product;
 use App\Http\Controllers\Controller;
 use App\Models\DumpTruck;
-use Aws\S3\S3Client;
-use Illuminate\Http\Request;
 use App\Models\Adfm\Page;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
-use League\Flysystem\Filesystem;
-use League\Glide\Server;
-use stdClass;
+use Doctrine\DBAL\Driver\Exception;
+use Illuminate\Http\File as IFile;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 
 class PageController extends Controller
 {
+    private AboutCardsInterface $aboutCardsService;
+    private HomesInterface $homesService;
+    private QuestionsAnswerInterface $qaService;
+
+    public function __construct(
+        AboutCardsInterface $_aboutCards,
+        HomesInterface $_homes,
+        QuestionsAnswerInterface $_qa
+    ) {
+        $this->aboutCardsService = $_aboutCards;
+        $this->homesService = $_homes;
+        $this->qaService = $_qa;
+
+    }
+
     public function showMainPage()
     {
-        $page = new stdClass();
-        $page->title = "Главная";
-        $page->slug = "/";
-        return view('adfm::public.index', compact('page'));
+        $aboutCards = $this->aboutCardsService->getAboutCards();
+        $homes = $this->homesService->getHomes();
+        $qaItems = $this->qaService->getQA();
+
+        $page = Page::where('slug', '=', 'index')->firstOrFail();
+
+        return view('adfm::public.index', [
+            'page' => $page,
+            'aboutCards' => $aboutCards,
+            'homes' => $homes,
+            'qaItems' => $qaItems
+        ]);
     }
 
     public function showPage($slug)
     {
         $page = Page::where('slug', '=', $slug)->firstOrFail();
-        return view('adfm::public.page', compact('page'));
-    }
-
-
-
-    /* TODO Через этот метод нужно представлять конкретный блог конкретной страницы */
-    public function showPageWith($pageSlug, $blogSlug)
-    {
-        $page = Page::where('slug', '=', $pageSlug)->firstOrFail();
         return view('adfm::public.page', compact('page'));
     }
 }

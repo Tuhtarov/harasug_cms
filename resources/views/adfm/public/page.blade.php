@@ -1,6 +1,6 @@
 @extends('adfm.public.layout')
 @section('meta-title', $page->title)
-@section('meta-description', $page->meta_description)
+@section('meta-description', $page->meta != null && $page->meta['description'] != null ? $page->meta['description'] : "Этно-культурная база отдыха Харасуг")
 
 @section('content')
     {{--Декор по бокам сайта--}}
@@ -11,7 +11,7 @@
         <h1 class="content-title">{!!$page->title!!}</h1>
         <div class="content-body">
             <div class="wrapper">
-                @if($page->title == "Кафе")
+                @if($page->slug == "cafe")
                     @include('adfm.components.cafe_tabs')
                 @elseif($page->title == "Отдых" || $page->title == "Галерея" || $page->title == "Новости")
                     @include('adfm.layouts.listviews.content_items_blog')

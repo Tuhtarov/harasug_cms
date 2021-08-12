@@ -3,6 +3,7 @@
 namespace App\Models\Adfm;
 
 use App\Helpers\Dev;
+use App\Models\AboutCards;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -99,16 +100,26 @@ class File extends Model
     public static function make(UploadedFile $file)
     {
         $item = new self();
-        $item->disk = env('DEFAULT_FILE_STORAGE');
+        $item->disk = env('FILESYSTEM_DRIVER');
         $item->file = $file;
         $item->mimes = new MimeTypes();
         $item->storage = Storage::disk($item->disk);
         return $item;
     }
 
+
+    /*
+     * Create: Alexander
+     */
+    public function fileable()
+    {
+        return $this->morphTo();
+    }
+
+
     public function name(): string
     {
-        return sha1(time().$this->file->getClientOriginalName());
+        return sha1(time() . $this->file->getClientOriginalName());
     }
 
     public function getPath(): string
@@ -117,17 +128,18 @@ class File extends Model
             throw new ErrorException('Нужно задать папку для yandex storage вида site.ru в файле .env
                 параметр - YANDEX_STORAGE_FOLDER или указать локальное хранилище', 500);
         }
-        return isset($this->path) ? $this->path.$this->name.'.'.$this->extension : 'user_files/'.date('Y/m/d', time()).$this->name.'.'.$this->extension;
+        return isset($this->path) ? $this->path . $this->name . '.' . $this->extension : 'user_files/' . date('Y/m/d',
+                time()) . $this->name . '.' . $this->extension;
     }
 
     public function getDirectory()
     {
-        return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
+        return isset($this->path) ? $this->path : 'user_files/' . date('Y/m/d', time());
     }
 
     public function getUrl()
     {
-        return Storage::disk($this->disk)->url($this->getDirectory().$this->filename);
+        return Storage::disk($this->disk)->url($this->getDirectory() . $this->filename);
     }
 
     public function getUrlAttribute()
@@ -137,7 +149,7 @@ class File extends Model
 
     public function getFilenameAttribute()
     {
-        return $this->name.'.'.$this->extension;
+        return $this->name . '.' . $this->extension;
     }
 
     public function extension(): string
@@ -186,7 +198,7 @@ class File extends Model
      */
     public function putFile($path, $name = null)
     {
-        $name = ($name != null) ? $name : $this->name().'.'.$this->extension();
+        $name = ($name != null) ? $name : $this->name() . '.' . $this->extension();
         $this->storage->putFileAs($path, $this->file, $name);
     }
 
@@ -194,20 +206,20 @@ class File extends Model
     public function upload()
     {
         $data = [
-            'name'          => $this->name(),
-            'mime'          => $this->mime(),
-            'hash'          => $this->hash(),
-            'extension'     => $this->extension(),
+            'name' => $this->name(),
+            'mime' => $this->mime(),
+            'hash' => $this->hash(),
+            'extension' => $this->extension(),
             'original_name' => $this->file->getClientOriginalName(),
-            'sort'          => isset($this->file->sort) ? $this->file->sort : 0,
-            'size'          => $this->file->getSize(),
-            'path'          => Str::finish($this->getDirectory(), '/'),
-            'disk'          => $this->disk,
-            'fileable_type'    => $this->fileable_type,
-            'fileable_id'    => $this->fileable_id,
-            'model_relation'    => $this->model_relation,
-            'group'         => $this->group,
-            'user_id'       => Auth::id(),
+            'sort' => isset($this->file->sort) ? $this->file->sort : 0,
+            'size' => $this->file->getSize(),
+            'path' => Str::finish($this->getDirectory(), '/'),
+            'disk' => $this->disk,
+            'fileable_type' => $this->fileable_type,
+            'fileable_id' => $this->fileable_id,
+            'model_relation' => $this->model_relation,
+            'group' => $this->group,
+            'user_id' => Auth::id(),
         ];
         $this->fill($data);
         $attachment = $this->getMatchesHash();
@@ -218,12 +230,12 @@ class File extends Model
 
         $attachment = $attachment->replicate()->fill([
             'original_name' => $this->file->getClientOriginalName(),
-            'sort'          => 0,
-            'user_id'       => Auth::id(),
-            'group'         => $this->group,
-            'fileable_type'    => $this->fileable_type,
-            'fileable_id'    => $this->fileable_id,
-            'model_relation'    => $this->model_relation
+            'sort' => 0,
+            'user_id' => Auth::id(),
+            'group' => $this->group,
+            'fileable_type' => $this->fileable_type,
+            'fileable_id' => $this->fileable_id,
+            'model_relation' => $this->model_relation
         ]);
         $attachment->file = $this->file;
         $attachment->time = time();
@@ -231,9 +243,6 @@ class File extends Model
         $attachment->storage = Storage::disk($this->disk);
         $attachment->save();
 
-
-
         return $attachment;
-
     }
 }

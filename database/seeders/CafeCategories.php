@@ -16,22 +16,18 @@ class CafeCategories extends Seeder
     {
         DB::table('cafe_categories')->insert([
             'name' => "Завтраки",
-            'image' => null,
             'cafe_type_id' => 1
         ]);
         DB::table('cafe_categories')->insert([
             'name' => "Эчпочмаки",
-            'image' => null,
             'cafe_type_id' => 2
         ]);
         DB::table('cafe_categories')->insert([
             'name' => "Горячее",
-            'image' => null,
             'cafe_type_id' => 1
         ]);
         DB::table('cafe_categories')->insert([
             'name' => "Мясное",
-            'image' => null,
             'cafe_type_id' => 2
         ]);
     }

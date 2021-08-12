@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // if (event.target.classList.value === "" || !event.target.className.split(' ')) {
         let target = event.target.className.split(' ').some(i => /primary-control.*/.test(i))
         if(!target) field_controls.forEach(control => control.checked = false )
 

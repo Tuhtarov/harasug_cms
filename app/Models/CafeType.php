@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Adfm\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,5 +18,9 @@ class CafeType extends Model
     public function cafe_category()
     {
         return $this->hasMany(CafeCategory::class, 'cafe_type_id', 'id');
+    }
+
+    public function image() {
+        return $this->morphOne(File::class, 'fileable');
     }
 }

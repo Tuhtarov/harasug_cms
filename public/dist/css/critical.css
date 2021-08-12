@@ -7,6 +7,9 @@
   position: relative;
   font-family: inherit;
 }
+.primary-control-select, .primary-control-datepicker, .primary-control-items, .primary-control-datepicker-body {
+  box-shadow: 0px 0px 6px black;
+}
 .primary-control-select, .primary-control-datepicker {
   position: relative;
   display: inline-block;
@@ -583,6 +586,7 @@ select {
   }
 
   .primary-control-select, .primary-control-datepicker {
+    min-width: auto;
     width: calc(100% - 1.6em) !important;
   }
 }

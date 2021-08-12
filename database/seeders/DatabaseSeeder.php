@@ -17,7 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CafeTypes::class,
             CafeCategories::class,
-            CafeRecords::class
+            CafeRecords::class,
+            SeederAboutCards::class,
+            SeederHomes::class,
+            SeederQA::class,
+            SeederPage::class
         ]);
     }
 }

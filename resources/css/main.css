@@ -765,56 +765,89 @@ a:focus {
 .about-items {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  margin: 0 -10px;
   justify-content: center;
 }
 .about-item {
   display: flex;
   overflow: hidden;
-  padding: 10px 10px;
+  margin: 10px;
+  width: calc(100% / 3 - 20px);
+}
+@media screen and (max-width: 768px) {
+  .about-item {
+    width: calc(80% / 2 - 20px);
+  }
+}
+@media screen and (max-width: 666px) {
+  .about-item {
+    width: calc(100% / 2 - 10px);
+    margin: 5px;
+  }
+}
+@media screen and (max-width: 460px) {
+  .about-item {
+    width: calc(100% - 20px);
+    margin: 8px auto;
+  }
 }
 .about-card {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 350px;
+  width: 100%;
   border: 2px #ffb236 dotted;
   background: white;
   border-radius: 10px;
-  min-height: 550px;
-  padding: 15px;
+  padding: 15px 10px;
 }
 .about-card-picture img {
   height: 300px;
   width: 100%;
   object-fit: cover;
   object-position: center;
-  border-bottom-left-radius: 35px;
-  border-top-right-radius: 35px;
+  border-bottom-left-radius: 70px;
+  border-top-right-radius: 70px;
 }
 .about-card-body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: auto;
+  flex: 1 1 0;
+  justify-content: space-between;
 }
 .about-card-title {
-  font-size: 25px;
-  margin-top: 25px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin: 15px 0 5px;
+  font-family: "Exo 2", sans-serif;
   color: #4f8757;
 }
 .about-card-btn {
   align-self: center;
-  font-size: 15px;
+  font-size: 14px;
   padding: 16px 46px;
   font-weight: 600;
   margin-top: 20px;
   background: #3c7244;
 }
 .about-card-description {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 28px;
+  word-break: break-word;
+}
+@media screen and (max-width: 992px) {
+  .about-card {
+    margin: 0 auto;
+  }
+  .about-card-description {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .about-card-picture img {
+    height: 250px;
+    border-bottom-left-radius: 35px;
+    border-top-right-radius: 35px;
+  }
 }
 
 .section-questions {
@@ -880,12 +913,14 @@ a:focus {
   margin: 0;
 }
 .question-item-title {
-  font-size: 25px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-family: "Exo 2", sans-serif;
+  margin-bottom: 6px;
 }
 .question-item-ansver {
   font-size: 18px;
-  line-height: 24px;
+  line-height: 26px;
+  word-break: break-word;
 }
 .question-read-more {
   position: relative;
@@ -915,6 +950,12 @@ a:focus {
   background-size: cover;
   padding: 137px 0 171px;
 }
+.section-form-label .inner-form .primary-form .primary-control {
+  width: calc(100% / 2);
+}
+.section-form-label .inner-form .primary-form .primary-control-datepicker, .section-form-label .inner-form .primary-form .primary-control-select {
+  width: calc(100% - 1.6em) !important;
+}
 
 .inner-form {
   display: flex;
@@ -922,9 +963,11 @@ a:focus {
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  padding: 30px;
+  padding: 20px 50px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.7);
+  margin: 0 auto;
+  width: calc(100% / 12 * 10);
 }
 .inner-form h2 {
   font-size: 24px;
@@ -944,11 +987,7 @@ a:focus {
 }
 
 .section-subscribe {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: white;
-  margin-top: 35px;
   padding-top: 55px;
   padding-bottom: 90px;
   position: relative;
@@ -990,16 +1029,15 @@ a:focus {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: -14px -14px;
-  margin-top: 35px;
+  margin: 35px -10px 0;
 }
 .subscribe-item {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 230px;
-  width: 362px;
-  margin: 7px 7px;
+  margin: 10px;
+  width: calc(100% / 3 - 20px);
   overflow: hidden;
   padding: 15px 15px;
   color: white;
@@ -1013,6 +1051,8 @@ a:focus {
   width: 100%;
 }
 .subscribe-item-bg img {
+  height: 100%;
+  width: 100%;
   object-position: center;
   object-fit: cover;
 }
@@ -1326,8 +1366,8 @@ a:focus {
     margin: 0 -5px;
   }
   .house-card-item {
-    margin: 5px;
-    width: calc(100% / 2 - 10px);
+    margin: 10px;
+    width: calc(90% / 2 - 10px);
   }
   .house-card-title, .house-card-price .house-card-price-value {
     font-size: 16px;
@@ -1347,29 +1387,18 @@ a:focus {
     margin: 15px 0 30px;
   }
 
-  .about-items {
-    margin: 0;
-  }
-
-  .about-item {
-    margin: 5px;
-  }
-
   .about-card {
-    min-height: auto;
     max-width: 310px;
-    margin: 0 auto;
     padding: 10px;
   }
   .about-card-picture img {
-    height: auto;
     max-width: 100%;
   }
   .about-card-body {
-    margin-top: 20px;
+    padding: 5px 0;
   }
   .about-card-title {
-    margin: 15px 0 10px;
+    margin: 6px 0;
     font-size: 18px;
     line-height: 20px;
   }
@@ -1385,7 +1414,7 @@ a:focus {
   }
 
   .section-questions {
-    padding: 40px 0 50px;
+    padding: 15px 0 50px;
   }
   .section-questions-title {
     font-size: 22px;
@@ -1396,14 +1425,14 @@ a:focus {
   }
 
   .question-item {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   .question-item:last-child {
     margin: 0;
   }
   .question-item-title {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
   }
   .question-item-ansver {
     font-size: 14px;
@@ -1523,6 +1552,14 @@ a:focus {
     height: 18px;
   }
 }
+@media screen and (max-width: 550px) {
+  .house-card-items {
+    margin: 0px -10px;
+  }
+  .house-card-item {
+    width: calc(100% / 2 - 20px);
+  }
+}
 @media screen and (max-width: 450px) {
   .wrapper {
     padding: 0 10px;
@@ -1531,10 +1568,14 @@ a:focus {
   .house-card-body {
     padding: 15px;
   }
+  .house-card-items {
+    margin: 0;
+  }
   .house-card-item {
-    margin: 5px;
-    width: calc(100% - 10px);
     font-size: 18px;
+    margin: 10px;
+    width: calc(100% - 10px);
+    max-width: 350px;
   }
   .house-card-title {
     font-size: 1em;
@@ -2443,6 +2484,15 @@ a:focus {
   .section-subscribe {
     margin-top: 0;
   }
+
+  .section-form-label .inner-form {
+    width: 100%;
+    min-height: 350px;
+    padding: 20px 10px;
+  }
+  .section-form-label .inner-form .primary-form-row {
+    margin: 0 -8px;
+  }
 }
 @media screen and (max-width: 450px) {
   .control-row.checkbox {
@@ -2489,6 +2539,10 @@ a:focus {
   }
   .slider-btn::after {
     bottom: 0px;
+  }
+
+  .section-form-label .inner-form .primary-form .primary-control {
+    width: 100%;
   }
 }
 

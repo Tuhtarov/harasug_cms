@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class CafeController extends Controller
 {
-    protected CafeInterface $cafeService;
-    protected Page $page;
+    private CafeInterface $cafeService;
+    private Page $page;
 
     public function __construct(CafeInterface $_cafe)
     {
@@ -20,10 +20,16 @@ class CafeController extends Controller
         $this->page = Page::where('slug', '=', 'cafe')->firstOrFail();
     }
 
+    /**
+     * Для обработки "Гостевого кафе"
+     */
     public function index()
     {
-        $cafe = $this->cafeService->getRecords();
-        return view('adfm::public.page', ['page' => $this->page, 'cafe' => $cafe]);
+        $cafe = $this->cafeService->getRecordsForPublicCafe();
+        return view('adfm::public.page', [
+            'page' => $this->page,
+            'cafe' => $cafe
+        ]);
     }
 
     public function create()

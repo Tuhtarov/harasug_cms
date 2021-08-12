@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Cafe\AdminCafeController;
+
 Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin')->group(function () {
 
 
@@ -61,7 +63,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/blocks/{id}/edit', 'BlockController@edit')->name('adfm.blocks.edit');
         Route::match(['put', 'patch'],'/blocks/{id}', 'BlockController@update')->name('adfm.blocks.update');
         Route::delete('/blocks/{id}', 'BlockController@destroy')->name('adfm.blocks.destroy');
-        
+
 
         /* Роуты для сообщений */
 
@@ -69,7 +71,28 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/feedbacks/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
         Route::delete('/feedbacks/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
 
+
+        /** Alexander
+        * Роуты для модуля кафе
+        */
+        Route::get('/feedbacks', 'FeedbackController@index')->name('adfm.feedbacks.index');
+        Route::get('/feedbacks/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
+        Route::delete('/feedbacks/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
+
 });
+
+/* Create: Alexander */
+Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin\Cafe')->group(function () {
+
+    /** Create: Alexander
+     * Роуты для модуля кафе
+     * TODO от этого места начать создание crud для модуля кафе
+     */
+    Route::get('/cafe', [AdminCafeController::class, 'index'])->name('admin.cafe.index');
+});
+
+
+
 //Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
 
 

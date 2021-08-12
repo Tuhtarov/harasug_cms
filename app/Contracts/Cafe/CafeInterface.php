@@ -11,7 +11,7 @@ interface CafeInterface {
      * @return mixed
      * Возвращает коллекцию всех товаров Кафе.
      */
-    function getRecords() : object;
+    function getRecordsForPublicCafe() : object;
 //
 //    /**
 //     * @param int $cafe_type

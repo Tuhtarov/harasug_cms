@@ -11,7 +11,8 @@ function clean() {
 }
 
 function css() {
-    return gulp.src('./resources/css/**/*.css')
+    // return gulp.src('./resources/css/**/*.css')
+    return gulp.src('./resources/css/*.css')
         .pipe(sourceMaps.init())
         .pipe(concat('app.css'))
         .pipe(autoprefixer())
