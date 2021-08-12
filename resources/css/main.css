@@ -233,7 +233,7 @@
 .cafe-tabs-block {
   display: none;
   flex-direction: column;
-  padding: 90px 0 0;
+  padding: 10px 0 0;
 }
 .cafe-tabs-block-info {
   position: relative;
@@ -280,7 +280,7 @@
   align-items: flex-start;
   position: relative;
   border-bottom: 2px solid black;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 .menu-section:not(:first-child) {
   margin-top: 90px;
@@ -365,7 +365,7 @@
   font-size: 14px;
 }
 .menu-section.no-category-image {
-  margin-top: -25px;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 992px) {

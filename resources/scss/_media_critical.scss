@@ -33,6 +33,13 @@
                 //минус две строки и хедера на всю высоту не будет
                 height: 100%;
                 min-height: 100vh;
+
+                &.dont-move {
+                    position: static;
+                    padding: 0;
+                    height: 100%;
+                    min-height: unset;
+                }
             }
         }
 

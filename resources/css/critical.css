@@ -263,7 +263,7 @@ select {
   line-height: 40px;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 .header .header-about .header-about-text {
   text-align: center;
@@ -464,6 +464,12 @@ select {
     padding: 0 0 40px;
     height: 100%;
     min-height: 100vh;
+  }
+  .header .header-body .header-body-navigation.dont-move {
+    position: static;
+    padding: 0;
+    height: 100%;
+    min-height: unset;
   }
   .header .header-info-bar {
     flex-direction: column;

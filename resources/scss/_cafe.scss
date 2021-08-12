@@ -29,7 +29,7 @@ $basic_dark: #4d4d4d;
         &-block {
             display: none;
             flex-direction: column;
-            padding: 90px 0 0;
+            padding: 10px 0 0;
             &-info {
                 position: relative;
                 align-self: center;
@@ -80,7 +80,7 @@ $basic_dark: #4d4d4d;
     align-items: flex-start;
     position: relative;
     border-bottom: 2px solid black;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 
     &:not(:first-child) {
         margin-top: 90px;
@@ -174,7 +174,7 @@ $basic_dark: #4d4d4d;
     }
 
     &.no-category-image {
-        margin-top: -25px;
+        margin-top: 30px;
     }
 }
 

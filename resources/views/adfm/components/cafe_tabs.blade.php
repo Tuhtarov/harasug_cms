@@ -12,14 +12,13 @@
 
     {{--Заполнение тела каждого из таба--}}
     <div class="cafe-tabs-body">
-
         {{--Создание табов--}}
         @foreach ($cafe as $cafe_title => $cafe_body)
+
             {{--cafe_title - key - наименованине кухни--}}
             {{--cafe_body - value - тело кухни--}}
-
-            <div id="{{$cafe_title}}" class="cafe-tabs-block @if($cafe_body['image'] == 'есть'){{"witch-image"}}@endif">
-
+            <div id="{{$cafe_title}}"
+                 class="cafe-tabs-block @if($cafe_body['image'] == 'есть'){{"witch-image"}}@endif">
                 {{--Если есть фото с баннером, то выведи баннер--}}
                 @if($cafe_body['image'] == 'есть')
                     <div class="cafe-tabs-block-info">
@@ -30,10 +29,10 @@
                             </p>
                         @endif
                     </div>
-                @endif"
+                @endif
 
                 {{--Заполнение секции menu-section контентом--}}
-                @foreach($cafe_body['categories'] as $category => $category_body )
+                @foreach($cafe_body['categories'] as $category => $category_body)
 
                     {{--category: key - наименование категории--}}
                     {{--category_body: value - товары категории--}}

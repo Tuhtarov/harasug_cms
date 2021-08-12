@@ -1,5 +1,5 @@
 <div class="header-body">
-    <div class="header-body-navigation">
+    <div class="header-body-navigation @if($page->slug == 'cafe' || $page->title == 'Меню кафе' || $page->title == 'Кафе'){{'dont-move'}}@endif">
         <nav class="header-info-bar">
             <ul class="bar-tel-items">
                 <li><a href="tel:+79832550535">+7 (983) 255 05 35</a></li>
