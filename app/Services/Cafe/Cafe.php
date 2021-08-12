@@ -11,15 +11,19 @@ use phpDocumentor\Reflection\Types\True_;
 use stdClass;
 use function React\Promise\all;
 
+/**
+ * Class Cafe реализующий интерфейс CafeInterface.
+ * Класс предназначен для удобной обработки данных сущности Кафе.
+ * @package App\Services\Cafe
+ */
 class Cafe implements CafeInterface
 {
     private \Illuminate\Support\Collection $categories;
     private \Illuminate\Support\Collection $records;
     private \Illuminate\Support\Collection $cafeTypes;
 
-
     /**
-     * Возвращает все категории, которые принадлежат идентификатору кухни.
+     * Возвращает все категории с их продуктами, которые принадлежат идентификатору кухни.
      * @param int $id
      * @return array|array[]
      */
@@ -49,14 +53,14 @@ class Cafe implements CafeInterface
         $this->records = CafeRecord::all()->collect();
 
         //берутся все виды кухни, у которых есть категории
-        $this->cafeTypes = CafeType::with('cafe_category')->get()->filter(function ($cafeType){
+        $this->cafeTypes = CafeType::with(['cafe_category', 'image'])->get()->filter(function ($cafeType){
             return $cafeType->cafe_category->count() > 0;
         });
 
         //берём категории у которых есть продукты
-        $this->categories = CafeCategory::with('cafe_record')->get()->filter(function ($category){
+        $this->categories = CafeCategory::with(['cafe_record', 'image'])->get()->filter(function ($category){
             return $category->cafe_record->count() > 0;
-        });;
+        });
     }
 
     /**
@@ -68,20 +72,17 @@ class Cafe implements CafeInterface
         //инициализируем свойства класса, которые хранят коллекции необходимых моделей.
         $this->initCollections();
 
-        //создаём stdClass для удобной обработки полученных записей
-        $cafeData = new stdClass();
-        $cafeData->cafe = collect();
+        $cafeData = collect();
 
-        //наполянем stdClass для отправки в клиентский код
+        //наполянем коллекцию данными для отправки в клиентский код
         foreach ($this->cafeTypes as $type) {
-            $cafeData->cafe->put($type->name, collect([
+            $cafeData->put($type->name, collect([
                 'image' => $type->image,
                 'message' => $type->message,
                 'categories' => $this->getCategoriesByTypeId($type->id)
             ]));
         }
 
-        //возвращаем данные в виде ассоциативного массива
-        return $cafeData->cafe;
+        return $cafeData;
     }
 }
