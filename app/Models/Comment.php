@@ -24,10 +24,10 @@ class Comment extends Model
     }
 
     public function phone() {
-        return $this->hasOne(Phone::class, 'id', 'phone_id');
+        return $this->belongsTo(Phone::class, 'phone_id', 'id');
     }
 
     public function email() {
-        return $this->hasOne(Email::class, 'id', 'email_id');
+        return $this->belongsTo(Email::class, 'email_id', 'id');
     }
 }

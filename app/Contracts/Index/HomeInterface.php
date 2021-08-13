@@ -2,6 +2,6 @@
 
 namespace App\Contracts\Index;
 
-interface HomesInterface {
+interface HomeInterface {
     public function getHomes();
 }

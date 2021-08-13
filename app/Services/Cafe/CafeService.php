@@ -16,7 +16,7 @@ use function React\Promise\all;
  * Класс предназначен для удобной обработки данных сущности Кафе.
  * @package App\Services\Cafe
  */
-class Cafe implements CafeInterface
+class CafeService implements CafeInterface
 {
     private \Illuminate\Support\Collection $categories;
     private \Illuminate\Support\Collection $records;

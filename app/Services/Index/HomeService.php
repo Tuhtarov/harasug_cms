@@ -2,10 +2,10 @@
 
 namespace App\Services\Index;
 
-use App\Contracts\Index\HomesInterface;
+use App\Contracts\Index\HomeInterface;
 use App\Models\Home;
 
-class Homes implements HomesInterface
+class HomeService implements HomeInterface
 {
     public function getHomes()
     {

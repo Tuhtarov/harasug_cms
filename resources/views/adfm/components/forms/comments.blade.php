@@ -1,11 +1,11 @@
 <form class="control-form" method="POST" action="{{route('comment.create')}}">
     @csrf
     <div class="control-column">
-        <input name="comment[name]" class="control-field" required placeholder="Имя"
+        <input name="comment[username]" class="control-field" required placeholder="Имя"
                type="text" minlength="5" aria-label="Поле для ввода имени">
-        <input name="comment[phone]" class="control-field" required placeholder="Телефон"
+        <input name="contacts[phone]" class="control-field" required placeholder="Телефон"
                type="tel" minlength="12" maxlength="12" aria-label="Поле для ввода номера телефона">
-        <input name="comment[email]" class="control-field" required placeholder="E-mail"
+        <input name="contacts[email]" class="control-field" required placeholder="E-mail"
                type="email" minlength="3" maxlength="254" aria-label="Поле для ввода электронной почты">
     </div>
     <div class="control-column">

@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Modules;
 
-use App\Contracts\Feedback\CommentsInterface;
+use App\Contracts\Feedback\CommentInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Adfm\Page;
-use App\Services\Feedback\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Ramsey\Collection\Collection;
 
 class CommentController extends Controller
 {
     private Page $page;
-    private CommentsInterface $commentsService;
+    private CommentInterface $commentsService;
 
-    public function __construct(CommentsInterface $commentsService)
+    public function __construct(CommentInterface $commentsService)
     {
         $this->page = Page::where('slug', '=', 'comments')->firstOrFail();
         $this->commentsService = $commentsService;
@@ -34,10 +31,16 @@ class CommentController extends Controller
     }
 
     /**
-     * Сохраняет новый отзыв в базу.
+     * Создаёт новый отзыв.
      */
-    public function create(Request $request) {
-        if($this->commentsService->saveComments($request->comment)) return back('201');
-        return back('409');
+    public function create(Request $request)
+    {
+        $isCreated = $this->commentsService->createComment($request->comment, $request->contacts);
+
+        if ($isCreated) {
+            return back(201);
+        }
+
+        return back();
     }
 }

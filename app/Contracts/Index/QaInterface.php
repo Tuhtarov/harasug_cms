@@ -2,6 +2,6 @@
 
 namespace App\Contracts\Index;
 
-interface QuestionsAnswerInterface {
+interface QaInterface {
     public function getQA();
 }

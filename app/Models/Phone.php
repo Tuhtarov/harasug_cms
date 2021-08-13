@@ -13,4 +13,8 @@ class Phone extends Model
 
     public $timestamps = false;
     protected $fillable = ['phone'];
+
+    public function comment() {
+        return $this->hasOne(Comment::class, 'phone_id', 'id');
+    }
 }

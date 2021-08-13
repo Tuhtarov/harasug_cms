@@ -13,4 +13,8 @@ class Email extends Model
 
     public $timestamps = false;
     protected $fillable = ['email'];
+
+    public function comment() {
+        return $this->hasOne(Comment::class, 'email_id', 'id');
+    }
 }

@@ -3,15 +3,15 @@
 namespace App\Providers;
 
 use App\Contracts\Cafe\CafeInterface;
-use App\Contracts\Feedback\CommentsInterface;
-use App\Contracts\Index\AboutCardsInterface;
-use App\Contracts\Index\HomesInterface;
-use App\Contracts\Index\QuestionsAnswerInterface;
-use App\Services\Index\AboutCards;
-use App\Services\Cafe\Cafe;
-use App\Services\Index\Homes;
-use App\Services\Index\QA;
-use App\Services\Feedback\Comment as CommentService;
+use App\Contracts\Feedback\CommentInterface;
+use App\Contracts\Index\AboutInterface;
+use App\Contracts\Index\HomeInterface;
+use App\Contracts\Index\QaInterface;
+use App\Services\Index\AboutService;
+use App\Services\Cafe\CafeService;
+use App\Services\Index\HomeService;
+use App\Services\Index\QaService;
+use App\Services\Feedback\CommentService as CommentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,19 +24,19 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //Кафе
-        $this->app->singleton(CafeInterface::class, Cafe::class);
+        $this->app->singleton(CafeInterface::class, CafeService::class);
 
         //О нас
-        $this->app->singleton(AboutCardsInterface::class, AboutCards::class);
+        $this->app->singleton(AboutInterface::class, AboutService::class);
 
         //Юрты
-        $this->app->singleton(HomesInterface::class, Homes::class);
+        $this->app->singleton(HomeInterface::class, HomeService::class);
 
         //Вопросы-ответы
-        $this->app->singleton(QuestionsAnswerInterface::class, QA::class);
+        $this->app->singleton(QaInterface::class, QaService::class);
 
         //Отзывы
-        $this->app->singleton(CommentsInterface::class, CommentService::class);
+        $this->app->singleton(CommentInterface::class, CommentService::class);
     }
 
     /**

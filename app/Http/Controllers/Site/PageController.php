@@ -2,38 +2,29 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Contracts\Feedback\CommentsInterface;
-use App\Contracts\Index\AboutCardsInterface;
-use App\Contracts\Index\HomesInterface;
-use App\Contracts\Index\QuestionsAnswerInterface;
-use App\Models\Adfm\File;
+use App\Contracts\Index\AboutInterface;
+use App\Contracts\Index\HomeInterface;
+use App\Contracts\Index\QaInterface;
 use App\Models\Adfm\Product;
 use App\Http\Controllers\Controller;
 use App\Models\DumpTruck;
 use App\Models\Adfm\Page;
-use Doctrine\DBAL\Driver\Exception;
-use Illuminate\Http\File as IFile;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 
 class PageController extends Controller
 {
-    private AboutCardsInterface $aboutCardsService;
-    private HomesInterface $homesService;
-    private QuestionsAnswerInterface $qaService;
-    private CommentsInterface $commentsService;
+    private AboutInterface $aboutCardsService;
+    private HomeInterface $homesService;
+    private QaInterface $qaService;
 
     public function __construct(
-        AboutCardsInterface $_aboutCards,
-        HomesInterface $_homes,
-        QuestionsAnswerInterface $_qa,
-        CommentsInterface $_comments
+        AboutInterface $_aboutCards,
+        HomeInterface $_homes,
+        QaInterface $_qa
     ) {
         $this->aboutCardsService = $_aboutCards;
         $this->homesService = $_homes;
         $this->qaService = $_qa;
-        $this->commentsService = $_comments;
     }
 
     public function showMainPage()
@@ -56,7 +47,7 @@ class PageController extends Controller
     {
         $page = Page::where('slug', '=', $slug)->firstOrFail();
 
-        return view('adfm::public.page',[
+        return view('adfm::public.page', [
             'page' => $page
         ]);
     }
