@@ -12,8 +12,5 @@ class Phone extends Model
     use SoftDeletes;
 
     public $timestamps = false;
-
-    public function comment() {
-        return $this->belongsTo(Comment::class, 'phone_id', 'id');
-    }
+    protected $fillable = ['phone'];
 }

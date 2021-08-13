@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Contracts\Feedback\CommentsInterface;
 use App\Contracts\Index\AboutCardsInterface;
 use App\Contracts\Index\HomesInterface;
 use App\Contracts\Index\QuestionsAnswerInterface;
@@ -21,16 +22,18 @@ class PageController extends Controller
     private AboutCardsInterface $aboutCardsService;
     private HomesInterface $homesService;
     private QuestionsAnswerInterface $qaService;
+    private CommentsInterface $commentsService;
 
     public function __construct(
         AboutCardsInterface $_aboutCards,
         HomesInterface $_homes,
-        QuestionsAnswerInterface $_qa
+        QuestionsAnswerInterface $_qa,
+        CommentsInterface $_comments
     ) {
         $this->aboutCardsService = $_aboutCards;
         $this->homesService = $_homes;
         $this->qaService = $_qa;
-
+        $this->commentsService = $_comments;
     }
 
     public function showMainPage()
@@ -52,6 +55,9 @@ class PageController extends Controller
     public function showPage($slug)
     {
         $page = Page::where('slug', '=', $slug)->firstOrFail();
-        return view('adfm::public.page', compact('page'));
+
+        return view('adfm::public.page',[
+            'page' => $page
+        ]);
     }
 }

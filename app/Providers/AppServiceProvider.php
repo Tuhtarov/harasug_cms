@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\Cafe\CafeInterface;
+use App\Contracts\Feedback\CommentsInterface;
 use App\Contracts\Index\AboutCardsInterface;
 use App\Contracts\Index\HomesInterface;
 use App\Contracts\Index\QuestionsAnswerInterface;
@@ -10,7 +11,7 @@ use App\Services\Index\AboutCards;
 use App\Services\Cafe\Cafe;
 use App\Services\Index\Homes;
 use App\Services\Index\QA;
-use Illuminate\Support\Facades\App;
+use App\Services\Feedback\Comment as CommentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,18 +24,19 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //Кафе
-        $cafeService = $this->app->make(Cafe::class);
-        $this->app->instance(CafeInterface::class, $cafeService);
+        $this->app->singleton(CafeInterface::class, Cafe::class);
 
         //О нас
-        $aboutCardsService = $this->app->make(AboutCards::class);
-        $this->app->instance(AboutCardsInterface::class, $aboutCardsService);
+        $this->app->singleton(AboutCardsInterface::class, AboutCards::class);
 
         //Юрты
         $this->app->singleton(HomesInterface::class, Homes::class);
 
-        //Юрты
+        //Вопросы-ответы
         $this->app->singleton(QuestionsAnswerInterface::class, QA::class);
+
+        //Отзывы
+        $this->app->singleton(CommentsInterface::class, CommentService::class);
     }
 
     /**
