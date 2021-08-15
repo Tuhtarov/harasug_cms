@@ -14,7 +14,7 @@
                 @if($page->slug == "cafe")
                     @include('adfm.components.cafe_tabs')
                 @elseif($page->title == "Отдых" || $page->title == "Галерея" || $page->title == "Новости")
-                    @include('adfm.layouts.listviews.content_items_blog')
+                    @include('adfm.layouts.listviews.general_cards')
                 @elseif($page->title == "Бронирование")
                     @include('adfm.layouts.listviews.reservation_cards')
                 @else

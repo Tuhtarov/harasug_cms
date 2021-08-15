@@ -21,7 +21,7 @@
     @section('content')
     @show
     {{--Секция с подпиской на соц.сети--}}
-    @if($page->title == "Контакты" || $page->title == "Главное")
+    @if($page->slug == "contacts" || $page->slug == 'index' || $page->slug = 'comments')
         @include('adfm.layouts.main.section_subscribe_socials')
     @endif
 </main>

@@ -53,10 +53,10 @@ class CommentService implements CommentInterface
         return $this->comments;
     }
 
-    public function createComment(array $comment, array $contacts): bool
+    public function createComment(array $comment): bool
     {
         //если сохраняемый комментарий не валиден, возвращаем false
-        if ($this->validateCommentOnInput($comment, $contacts) == false) {
+        if ($this->validateCommentOnInput($comment) == false) {
             return false;
         }
 
@@ -64,27 +64,27 @@ class CommentService implements CommentInterface
         $this->initVariable('admin');
 
         //если в БД уже есть почта и номер телефона, то возвращаем false
-        if ($this->checkPhoneAndEmailInDatabase($contacts)) {
+        if ($this->checkPhoneAndEmailInDatabase($comment)) {
             return false;
         }
 
         //создаём новую запись в базе
-        return $this->createCommentWithPhoneAndEmail($comment, $contacts);
+        return $this->createCommentWithPhoneAndEmail($comment);
     }
 
     /**
      * Функция создаёт новые записи в моделях Comments, Email, Phone.
      * Возвращает результат работы. True - сохранено, False - нет.
      */
-    private function createCommentWithPhoneAndEmail(array $comment, array $contacts): bool
+    private function createCommentWithPhoneAndEmail(array $comment): bool
     {
         $resultTransaction = false;
         try {
-            DB::transaction(function () use (&$contacts, &$comment, &$resultTransaction) {
-                $phone = new Phone($contacts);
+            DB::transaction(function () use (&$comment, &$resultTransaction) {
+                $phone = new Phone($comment);
                 $phone->save();
 
-                $email = new Email($contacts);
+                $email = new Email($comment);
                 $email->save();
 
                 $comment += [
@@ -122,13 +122,11 @@ class CommentService implements CommentInterface
      * Валидирует объекты комментария.
      * Если ошибок нет, возвращается true.
      * @param array $comment
-     * @param array $contacts
      * @return bool
      */
-    private function validateCommentOnInput(array $comment, array $contacts): bool
+    private function validateCommentOnInput(array $comment): bool
     {
-        $validateData = array_merge($comment, $contacts);
-        $validator = Validator::make($validateData, [
+        $validator = Validator::make($comment, [
             'username' => 'required|Min:' . self::NAME_MIN_LENGTH,
             'message' => 'required|Min:' . self::MESSAGE_MIN_LENGTH,
             'phone' => 'required|regex:/^\+7([0-9]+)+$/|Min:' . self::PHONE_LENGTH . '|Max:' . self::PHONE_LENGTH,

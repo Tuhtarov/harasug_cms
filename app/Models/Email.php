@@ -11,8 +11,10 @@ class Email extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $timestamps = false;
+    protected $table = 'emails';
     protected $fillable = ['email'];
+
+    public $timestamps = false;
 
     public function comment() {
         return $this->hasOne(Comment::class, 'email_id', 'id');

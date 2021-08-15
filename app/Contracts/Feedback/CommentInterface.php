@@ -21,17 +21,17 @@ interface CommentInterface {
     public function getComments(string $mode = 'public') : Collection;
 
     /**
-     * Принимает 2 массива:
-     * 1. Имя и сообщение | ключи: [username, message].
-     * 2. Телефон и email | ключи: [phone, email].
+     * Принимает массив с данными:
+     * Имя, сообщение, телефон и email;
+     * Ключи массива должны соответствовать следующим: [username, message, phone, email].
      *
      * Возвращает результат выполнения, true - сохранено / false - нет.
      *
-     * Если совпадений в базе нет, создаёт новый отзыв в моделе Comment.
-     * Так же создаются соответсвующие записи из массива contacts в моделях Phone и Email.
+     * Если совпадений в базе нет, то создаёт новую запись в таблице comments.
+     * Так же создаются соответствующие записи в таблицах phones и emails.
+     *
      * @param array $comment
-     * @param array $contacts
      * @return bool
      */
-    public function createComment(array $comment, array $contacts) : bool;
+    public function createComment(array $comment) : bool;
 }

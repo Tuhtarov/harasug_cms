@@ -11,8 +11,10 @@ class Phone extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $timestamps = false;
+    protected $table = 'phones';
     protected $fillable = ['phone'];
+
+    public $timestamps = false;
 
     public function comment() {
         return $this->hasOne(Comment::class, 'phone_id', 'id');

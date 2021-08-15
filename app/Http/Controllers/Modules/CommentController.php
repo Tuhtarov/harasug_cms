@@ -35,7 +35,7 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
-        $isCreated = $this->commentsService->createComment($request->comment, $request->contacts);
+        $isCreated = $this->commentsService->createComment($request->comment);
 
         if ($isCreated) {
             return back(201);

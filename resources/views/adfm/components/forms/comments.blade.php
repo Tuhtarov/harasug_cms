@@ -3,14 +3,14 @@
     <div class="control-column">
         <input name="comment[username]" class="control-field" required placeholder="Имя"
                type="text" minlength="5" aria-label="Поле для ввода имени">
-        <input name="contacts[phone]" class="control-field" required placeholder="Телефон"
+        <input name="comment[phone]" class="control-field" required placeholder="Телефон"
                type="tel" minlength="12" maxlength="12" aria-label="Поле для ввода номера телефона">
-        <input name="contacts[email]" class="control-field" required placeholder="E-mail"
+        <input name="comment[email]" class="control-field" required placeholder="E-mail"
                type="email" minlength="3" maxlength="254" aria-label="Поле для ввода электронной почты">
     </div>
     <div class="control-column">
         <textarea name="comment[message]" class="control-textarea" minlength="15" placeholder="Отзыв" rows="6" cols="12"
-                  required></textarea>
+                  aria-label="Ваш отзыв" required></textarea>
     </div>
     <div class="control-row checkbox">
         <div class="control-checkbox-group">
