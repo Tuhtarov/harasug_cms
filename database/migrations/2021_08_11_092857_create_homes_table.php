@@ -19,7 +19,7 @@ class CreateHomesTable extends Migration
             $table->string('slug')->unique();
             //тут я посчитал нужным добавить тип дома, мало ли заказчику захочется поменять слово "Юрта" на какое-нибудь другое.
             $table->string('type')->nullable()->default('юрта');
-            $table->unsignedSmallInteger('max_peoples');
+            $table->unsignedSmallInteger('max_peoples')->default(2);
 
             $table->smallInteger('price')->nullable()->unsigned();
             $table->string('price_info')->nullable()->default('цена / ночь');

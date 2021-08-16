@@ -23,6 +23,11 @@
 
 - php artisan migrate:fresh --seed
 
+4) Что бы избежать возможные проблемы при инициализации измените конфиг в своём php.ini:
+
+- снять ; с extension=file_info
+- снять ; с extension=pdo_mysql
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and

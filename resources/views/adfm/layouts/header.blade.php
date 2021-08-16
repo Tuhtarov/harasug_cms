@@ -36,18 +36,18 @@
                 <nav id="my-menu">
                     <ul class="header-navigation-list">
                         <li @if($page->slug=="index" || $_SERVER['REQUEST_URI'] == '/'){{'class=arrow-current-page'}}@endif>
-                            <a href="/">главная</a></li>
-                        <li @if($page->slug=="cafe"){{'class=arrow-current-page'}}@endif><a href="cafe">кафе</a></li>
+                            <a href="{{route('adfm.show.main-page')}}">главная</a></li>
+                        <li @if($page->slug=="cafe"){{'class=arrow-current-page'}}@endif><a href="{{route('cafe.index')}}">кафе</a></li>
                         <li @if($page->slug=="gallery"){{'class=arrow-current-page'}}@endif><a
-                                href="gallery">галерея</a></li>
-                        <li @if($page->slug=="chill"){{'class=arrow-current-page'}}@endif><a href="chill">отдых</a></li>
-                        <li @if($page->slug=="reservation"){{'class=arrow-current-page'}}@endif><a href="reservation">бронирование</a>
+                                href="{{asset('/gallery')}}">галерея</a></li>
+                        <li @if($page->slug=="chill"){{'class=arrow-current-page'}}@endif><a href="{{asset('/chill')}}">отдых</a></li>
+                        <li @if($page->slug=="reservation"){{'class=arrow-current-page'}}@endif><a href="{{asset('/reservation')}}">бронирование</a>
                         </li>
                         <li @if($page->slug=="contacts"){{'class=arrow-current-page'}}@endif><a
-                                href="contacts">контакты</a></li>
-                        <li @if($page->slug=="news"){{'class=arrow-current-page'}}@endif><a href="news">новости</a></li>
+                                href="{{asset('/contacts')}}">контакты</a></li>
+                        <li @if($page->slug=="news"){{'class=arrow-current-page'}}@endif><a href="{{route('adfm.show.news-list')}}">новости</a></li>
                         <li @if($page->slug=="comments"){{'class=arrow-current-page'}}@endif><a
-                                href="comments">отзывы</a></li>
+                                href="{{route('comment.index')}}">отзывы</a></li>
                     </ul>
                 </nav>
             </div>

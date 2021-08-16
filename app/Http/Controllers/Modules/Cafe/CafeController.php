@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Modules;
+namespace App\Http\Controllers\Modules\Cafe;
 
 use App\Contracts\Cafe\ICafe;
 use App\Http\Controllers\Controller;

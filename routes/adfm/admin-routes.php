@@ -3,8 +3,6 @@
 use App\Http\Controllers\Admin\Cafe\AdminCafeController;
 
 Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin')->group(function () {
-
-
         Route::get('/pages', 'PageController@index')->name('adfm.pages.index');
         Route::get('/pages/create', 'PageController@create')->name('adfm.pages.create');
         Route::post('/pages', 'PageController@store')->name('adfm.pages.store');
@@ -15,8 +13,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
 //Route::get('/pages/{id}/clone', 'PageController@clone');
 
 
-    /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
-
+        /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
         Route::get('/menus', 'MenuController@index')->name('adfm.menus.index');
         Route::get('/menus/create', 'MenuController@create')->name('adfm.menus.create');
         Route::post('/menus', 'MenuController@store')->name('adfm.menus.store');
@@ -25,8 +22,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::delete('/menus/{id}', 'MenuController@destroy')->name('adfm.menus.destroy');
 
 
-    /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
-
+        /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
         Route::get('/menuitems', 'MenuItemController@index')->name('adfm.menuitems.index');
         Route::get('/menuitems/create/{menu_id?}', 'MenuItemController@create')->name('adfm.menuitems.create');
         Route::get('/menuitems/create/{menu_id?}/{model_name}/{model_id}', 'MenuItemController@createFromModel')->name('adfm.menuitems.createFromModel');
@@ -36,8 +32,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::delete('/menuitems/{id}', 'MenuItemController@destroy')->name('adfm.menuitems.destroy');
 
 
-    /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
-
+        /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
         Route::get('/roles', 'RoleController@index')->name('adfm.roles.index');
         Route::get('/roles/create', 'RoleController@create')->name('adfm.roles.create');
         Route::post('/roles', 'RoleController@store')->name('adfm.roles.store');
@@ -46,8 +41,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::delete('/roles/{id}', 'RoleController@destroy')->name('adfm.roles.destroy');
 
 
-    /* Роуты админки сгенерированные автоматически для App\Adfm\Controllers\Admin\UserController */
-
+        /* Роуты админки сгенерированные автоматически для App\Adfm\Controllers\Admin\UserController */
         Route::get('/users', 'UserController@index')->name('adfm.users.index');
         Route::get('/users/create', 'UserController@create')->name('adfm.users.create');
         Route::post('/users', 'UserController@store')->name('adfm.users.store');
@@ -55,8 +49,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::match(['put', 'patch'],'/users/{id}', 'UserController@update')->name('adfm.users.update');
         Route::delete('/users/{id}', 'UserController@destroy')->name('adfm.users.destroy');
 
-    /* Роуты блоков */
-
+        /* Роуты блоков */
         Route::get('/blocks', 'BlockController@index')->name('adfm.blocks.index');
         Route::get('/blocks/create', 'BlockController@create')->name('adfm.blocks.create');
         Route::post('blocks', 'BlockController@store')->name('adfm.blocks.store');
@@ -66,28 +59,17 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
 
 
         /* Роуты для сообщений */
-
         Route::get('/feedbacks', 'FeedbackController@index')->name('adfm.feedbacks.index');
         Route::get('/feedbacks/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
         Route::delete('/feedbacks/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
-
-
-        /** Alexander
-        * Роуты для модуля кафе
-        */
+        \
         Route::get('/feedbacks', 'FeedbackController@index')->name('adfm.feedbacks.index');
         Route::get('/feedbacks/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
         Route::delete('/feedbacks/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
-
 });
 
 /* Create: Alexander */
 Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin\Cafe')->group(function () {
-
-    /** Create: Alexander
-     * Роуты для модуля кафе
-     * TODO от этого места начать создание crud для модуля кафе
-     */
     Route::get('/cafe', [AdminCafeController::class, 'index'])->name('admin.cafe.index');
 });
 
