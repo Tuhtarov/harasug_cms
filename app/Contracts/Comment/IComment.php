@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Contracts\Feedback;
+namespace App\Contracts\Comment;
 
 use Illuminate\Support\Collection;
 
-interface CommentInterface {
+interface IComment {
 
     /**
      * Возвращает коллекцию Comment.

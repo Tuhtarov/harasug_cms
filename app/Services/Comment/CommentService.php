@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Services\Feedback;
+namespace App\Services\Comment;
 
-use App\Contracts\Feedback\CommentInterface;
+use App\Contracts\Comment\IComment;
 use App\Models\Comment;
 use App\Models\Email;
 use App\Models\Phone;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
-class CommentService implements CommentInterface
+class CommentService implements IComment
 {
     private Collection $comments;
 
@@ -55,7 +54,7 @@ class CommentService implements CommentInterface
 
     public function createComment(array $comment): bool
     {
-        //если сохраняемый комментарий не валиден, возвращаем false
+//        если сохраняемый комментарий не валиден, возвращаем false
         if ($this->validateCommentOnInput($comment) == false) {
             return false;
         }
@@ -118,29 +117,8 @@ class CommentService implements CommentInterface
         return $hasPhoneOrEmail;
     }
 
-    /**
-     * Валидирует объекты комментария.
-     * Если ошибок нет, возвращается true.
-     * @param array $comment
-     * @return bool
-     */
-    private function validateCommentOnInput(array $comment): bool
-    {
-        $validator = Validator::make($comment, [
-            'username' => 'required|Min:' . self::NAME_MIN_LENGTH,
-            'message' => 'required|Min:' . self::MESSAGE_MIN_LENGTH,
-            'phone' => 'required|regex:/^\+7([0-9]+)+$/|Min:' . self::PHONE_LENGTH . '|Max:' . self::PHONE_LENGTH,
-            'email' => 'required|regex:/^.+@.+$/i|Min:' . self::EMAIL_MIN_LENGTH . '|Max:' . self::EMAIL_MAX_LENGTH,
-        ]);
-
-        return $validator->errors()->count() == 0;
+    private function validateCommentOnInput($comment) : bool {
+        return true;
     }
-
-    //константы для валидации
-    private const PHONE_LENGTH = 12;
-    private const NAME_MIN_LENGTH = 4;
-    private const EMAIL_MIN_LENGTH = 3;
-    private const EMAIL_MAX_LENGTH = 254;
-    private const MESSAGE_MIN_LENGTH = 15;
 }
 

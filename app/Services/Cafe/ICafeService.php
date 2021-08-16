@@ -2,7 +2,7 @@
 
 namespace App\Services\Cafe;
 
-use App\Contracts\Cafe\CafeInterface;
+use App\Contracts\Cafe\ICafe;
 use App\Models\CafeCategory;
 use App\Models\CafeRecord;
 use App\Models\CafeType;
@@ -16,7 +16,7 @@ use function React\Promise\all;
  * Класс предназначен для удобной обработки данных сущности Кафе.
  * @package App\Services\Cafe
  */
-class CafeService implements CafeInterface
+class ICafeService implements ICafe
 {
     private \Illuminate\Support\Collection $categories;
     private \Illuminate\Support\Collection $records;

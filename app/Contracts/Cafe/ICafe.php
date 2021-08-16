@@ -5,7 +5,7 @@ namespace App\Contracts\Cafe;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-interface CafeInterface {
+interface ICafe {
 
     /**
      * @return mixed

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Modules;
 
-use App\Contracts\Cafe\CafeInterface;
+use App\Contracts\Cafe\ICafe;
 use App\Http\Controllers\Controller;
 use App\Models\Adfm\Page;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 
 class CafeController extends Controller
 {
-    private CafeInterface $cafeService;
+    private ICafe $cafeService;
     private Page $page;
 
-    public function __construct(CafeInterface $_cafe)
+    public function __construct(ICafe $_cafe)
     {
         $this->cafeService = $_cafe;
         $this->page = Page::where('slug', '=', 'cafe')->firstOrFail();

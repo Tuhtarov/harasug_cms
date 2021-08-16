@@ -2,11 +2,11 @@
 
 namespace App\Services\Index;
 
-use App\Contracts\Index\AboutInterface;
+use App\Contracts\Index\IAbout;
 use App\Models\AboutCard;
 use Illuminate\Database\Eloquent\Collection;
 
-class AboutService implements AboutInterface {
+class AboutService implements IAbout {
 
     public function getAboutCards()
     {

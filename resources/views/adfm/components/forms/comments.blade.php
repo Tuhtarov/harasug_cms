@@ -1,16 +1,23 @@
+{{--@error()--}}
+{{--    <div>--}}
+{{--        <ul style="background: black; padding: 5px">--}}
+{{--            <li style="margin-top: 5px; color: white"></li>--}}
+{{--        </ul>--}}
+{{--    </div>--}}
+{{--@enderror--}}
 <form class="control-form" method="POST" action="{{route('comment.create')}}">
     @csrf
     <div class="control-column">
         <input name="comment[username]" class="control-field" required placeholder="Имя"
-               type="text" minlength="5" aria-label="Поле для ввода имени">
+               type="text" minlength="5" aria-label="Поле для ввода имени" value="{{old('comment.username')}}">
         <input name="comment[phone]" class="control-field" required placeholder="Телефон"
-               type="tel" minlength="12" maxlength="12" aria-label="Поле для ввода номера телефона">
+               type="tel" minlength="12" maxlength="12" aria-label="Поле для ввода номера телефона" value="{{old('comment.phone')}}">
         <input name="comment[email]" class="control-field" required placeholder="E-mail"
-               type="email" minlength="3" maxlength="254" aria-label="Поле для ввода электронной почты">
+               type="email" minlength="3" maxlength="254" aria-label="Поле для ввода электронной почты" value="{{old('comment.email')}}">
     </div>
     <div class="control-column">
         <textarea name="comment[message]" class="control-textarea" minlength="15" placeholder="Отзыв" rows="6" cols="12"
-                  aria-label="Ваш отзыв" required></textarea>
+                  aria-label="Ваш отзыв" required>{{old('comment.message')}}</textarea>
     </div>
     <div class="control-row checkbox">
         <div class="control-checkbox-group">

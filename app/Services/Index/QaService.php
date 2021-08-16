@@ -1,10 +1,10 @@
 <?php
 namespace App\Services\Index;
 
-use App\Contracts\Index\QaInterface;
+use App\Contracts\Index\IQuestionAnswer;
 use App\Models\QuestionAnswer;
 
-class QaService implements QaInterface {
+class QaService implements IQuestionAnswer {
 
     public function getQA()
     {

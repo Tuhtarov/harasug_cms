@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Contracts\Index\AboutInterface;
-use App\Contracts\Index\HomeInterface;
-use App\Contracts\Index\QaInterface;
+use App\Contracts\Index\IAbout;
+use App\Contracts\Index\IHome;
+use App\Contracts\Index\IQuestionAnswer;
 use App\Models\Adfm\Product;
 use App\Http\Controllers\Controller;
 use App\Models\DumpTruck;
@@ -13,14 +13,14 @@ use App\Models\Adfm\Page;
 
 class PageController extends Controller
 {
-    private AboutInterface $aboutCardsService;
-    private HomeInterface $homesService;
-    private QaInterface $qaService;
+    private IAbout $aboutCardsService;
+    private IHome $homesService;
+    private IQuestionAnswer $qaService;
 
     public function __construct(
-        AboutInterface $_aboutCards,
-        HomeInterface $_homes,
-        QaInterface $_qa
+        IAbout $_aboutCards,
+        IHome $_homes,
+        IQuestionAnswer $_qa
     ) {
         $this->aboutCardsService = $_aboutCards;
         $this->homesService = $_homes;
