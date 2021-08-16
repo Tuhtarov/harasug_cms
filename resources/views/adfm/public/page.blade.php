@@ -13,7 +13,8 @@
             <div class="wrapper">
                 @if($page->slug == "cafe")
                     @include('adfm.components.cafe_tabs')
-                @elseif($page->title == "Отдых" || $page->title == "Галерея" || $page->title == "Новости")
+                @elseif($page->title == "Отдых" || $page->title == "Галерея" || $page->title == "Новости"
+                     || $page->slug == "chill" || $page->slug == "news" || $page->slug == "gallery")
                     @include('adfm.layouts.listviews.general_cards')
                 @elseif($page->title == "Бронирование")
                     @include('adfm.layouts.listviews.reservation_cards')

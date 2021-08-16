@@ -19,7 +19,7 @@
                                 <p class="content-item-body-price-value" data-before="от"
                                    data-after="Р">{{$item->price}}
                                 </p>
-                                <p class="content-item-body-price-info">{{isset($item->price_info) ?? $item->price_info}}</p>
+                                <p class="content-item-body-price-info">{{$item->price_info}}</p>
                             </div>
                         @endif
                         <a class="content-item-body-link" href="{{$item->url}}">Подробнее</a>

@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Contracts\Index\IAbout;
 use App\Contracts\Index\IHome;
 use App\Contracts\Index\IQuestionAnswer;
-use App\Models\Adfm\Product;
 use App\Http\Controllers\Controller;
-use App\Models\DumpTruck;
 use App\Models\Adfm\Page;
 
 

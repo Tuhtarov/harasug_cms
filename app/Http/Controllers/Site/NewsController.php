@@ -3,23 +3,20 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Adfm\News;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Adfm\Page;
 use stdClass;
 
 class NewsController extends Controller
 {
     public function showNewsList()
     {
-        $news = News::all();
+        $cards = News::all();
 
-        $page = new stdClass();
-        $page->title = "Новости";
-        $page->slug = "news";
+        $page = Page::where('slug', 'news')->firstOrFail();
 
         return view('adfm::public.news.list', [
-            'cards' => $news,
+            'cards' => $cards,
             'page' => $page
         ]);
     }

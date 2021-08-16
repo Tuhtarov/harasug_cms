@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Contracts\Cafe\ICafe;
+use App\Contracts\Chill\IChill;
 use App\Contracts\Comment\IComment;
+use App\Contracts\Gallery\IGallery;
 use App\Contracts\Index\IAbout;
 use App\Contracts\Index\IHome;
 use App\Contracts\Index\IQuestionAnswer;
+use App\Services\Chill\ChillService;
+use App\Services\Gallery\GalleryService;
 use App\Services\Index\AboutService;
-use App\Services\Cafe\ICafeService;
+use App\Services\Cafe\CafeService;
 use App\Services\Index\HomeService;
 use App\Services\Index\QaService;
 use App\Services\Comment\CommentService;
@@ -24,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //Кафе
-        $this->app->singleton(ICafe::class, ICafeService::class);
+        $this->app->singleton(ICafe::class, CafeService::class);
 
         //О нас
         $this->app->singleton(IAbout::class, AboutService::class);
@@ -37,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
 
         //Отзывы
         $this->app->singleton(IComment::class, CommentService::class);
+
+        //Отдых
+        $this->app->singleton(IChill::class, ChillService::class);
+
+        //Галерея
+        $this->app->singleton(IGallery::class, GalleryService::class);
     }
 
     /**

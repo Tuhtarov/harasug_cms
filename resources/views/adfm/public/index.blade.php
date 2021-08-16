@@ -8,6 +8,5 @@
         @include('adfm.layouts.main.about_card_items')
         @include('adfm.layouts.main.questions_answers')
         @include('adfm.components.forms.checkdate')
-        @include('adfm.layouts.main.section_subscribe_socials')
     </div>
 @endsection

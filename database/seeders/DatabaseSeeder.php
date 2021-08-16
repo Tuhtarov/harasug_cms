@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
             SeederPage::class,
             SeederPhone::class,
             SeederEmail::class,
-            SeederComment::class
+            SeederComment::class,
+            SeederNews::class,
+            SeederChill::class,
+            SeederGallery::class
         ]);
     }
 }
