@@ -27,15 +27,15 @@ class PageController extends Controller
 
     public function showMainPage()
     {
-        $aboutCards = $this->aboutCardsService->getAboutCards();
+        $abouts = $this->aboutCardsService->getAboutItems();
         $homes = $this->homesService->getHomes();
-        $qaItems = $this->qaService->getQA();
+        $qaItems = $this->qaService->getQA(self::QTY_QA);
 
         $page = Page::where('slug', '=', 'index')->firstOrFail();
 
         return view('adfm::public.index', [
             'page' => $page,
-            'aboutCards' => $aboutCards,
+            'abouts' => $abouts,
             'homes' => $homes,
             'qaItems' => $qaItems
         ]);
@@ -49,4 +49,6 @@ class PageController extends Controller
             'page' => $page
         ]);
     }
+
+    private const QTY_QA = 5;
 }

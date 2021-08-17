@@ -6,11 +6,15 @@ use App\Contracts\Index\IAbout;
 use App\Models\AboutCard;
 use Illuminate\Database\Eloquent\Collection;
 
-class AboutService implements IAbout {
-
-    public function getAboutCards()
+class AboutService implements IAbout
+{
+    public function getAboutItems()
     {
-        $aboutCard = AboutCard::all();
-        return $aboutCard->collect();
+        return AboutCard::all()->collect();
+    }
+
+    public function getAboutBySlug(string $slug)
+    {
+        return AboutCard::where('slug', $slug)->firstOrFail();
     }
 }

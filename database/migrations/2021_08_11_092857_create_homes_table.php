@@ -16,13 +16,20 @@ class CreateHomesTable extends Migration
         Schema::create('homes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            //имя юрты для страницы бронирования (там имя по макету отличается)
+            $table->string('title_full');
+            //слаг определяется по полному имени юрты
             $table->string('slug')->unique();
-            //тут я посчитал нужным добавить тип дома, мало ли заказчику захочется поменять слово "Юрта" на какое-нибудь другое.
             $table->string('type')->nullable()->default('юрта');
-            $table->unsignedSmallInteger('max_peoples')->default(2);
 
-            $table->smallInteger('price')->nullable()->unsigned();
+            $table->text('description')->nullable();
+            $table->unsignedSmallInteger('max_peoples')->default(2);
+            //vip / не vip
+            $table->tinyText('status')->nullable();
+
+            $table->smallInteger('price')->nullable()->unsigned()->default('5000');
             $table->string('price_info')->nullable()->default('цена / ночь');
+
             $table->softDeletes();
             $table->timestamps();
         });

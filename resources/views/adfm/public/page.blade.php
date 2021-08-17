@@ -1,11 +1,7 @@
 @extends('adfm.public.layout')
-@section('meta-title', $page->title)
-@section('meta-description', $page->meta != null && $page->meta['description'] != null ? $page->meta['description'] : "Этно-культурная база отдыха Харасуг")
-
 @section('content')
     {{--Декор по бокам сайта--}}
     <span class="thumb-container"><span class="thumbnails part-2"></span></span>
-
     {{--Основа--}}
     <section class="content">
         <h1 class="content-title">{!!$page->title!!}</h1>

@@ -3,6 +3,7 @@
 @import "_title_decoration";
 @import "cafe";
 
+$basic_brown: #3d2a0c;
 $basic_yellow: #ffb236;
 $basic_green: #38807c;
 $basic_green_light: #4f8757;
@@ -426,8 +427,22 @@ a {
     background: #388067;
     padding: 50px 0 70px;
 
+    &.second-theme {
+        background: unset;
+
+        *, .section-questions-title {
+            color: $basic_brown!important;
+        }
+
+        &::before {
+            display: none;
+            position: static;
+        }
+    }
+
     .wrapper {
-        // max-width: 945px;
+        position: relative;
+        z-index: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1534,7 +1549,6 @@ a {
 //================main media=================
 
 //================Blog, Chill, gallery -pages=================
-$basic_brown: #3d2a0c;
 .content {
     position: relative;
     z-index: 2;

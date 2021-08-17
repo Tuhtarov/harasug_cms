@@ -1,12 +1,12 @@
-@extends('adfm::public.layout')
+@extends('adfm.public.layout')
 @section('content')
+    {{--Декор по бокам сайта--}}
     <span class="thumb-container"><span class="thumbnails part-2"></span></span>
-
     <section class="content">
-        <h1 class="content-title">{{$page->title}}</h1>
+        <h1 class="content-title">{!!$page->title!!}</h1>
         <div class="content-body">
             <div class="wrapper">
-                @include('adfm.layouts.listviews.general_cards')
+                {!!$home->description!!}
             </div>
         </div>
     </section>

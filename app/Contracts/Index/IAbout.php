@@ -7,9 +7,6 @@ namespace App\Contracts\Index;
  * @package App\Contracts\Index
  */
 interface IAbout {
-    /**
-     * Возвращает массив карточек блока "О нас".
-     * @return array
-     */
-    public function getAboutCards();
+    public function getAboutItems();
+    public function getAboutBySlug(string $slug);
 }

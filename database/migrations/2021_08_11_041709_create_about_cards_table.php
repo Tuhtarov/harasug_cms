@@ -16,8 +16,9 @@ class CreateAboutCardsTable extends Migration
         Schema::create('about_cards', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('excerpt')->nullable();
             $table->string('slug')->unique();
+            $table->string('excerpt');
+            $table->text('content');
             $table->timestamps();
             $table->softDeletes();
         });

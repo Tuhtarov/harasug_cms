@@ -16,11 +16,12 @@ class Home extends Model
     use SoftDeletes;
 
     protected $table = 'homes';
+    protected $guarded = false;
 
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('title_full')
             ->saveSlugsTo('slug');
     }
 

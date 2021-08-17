@@ -11,4 +11,9 @@ class HomeService implements IHome
     {
         return Home::all()->collect();
     }
+
+    public function getHomeBySlug(string $slug)
+    {
+        return Home::where('slug', $slug)->firstOrFail();
+    }
 }

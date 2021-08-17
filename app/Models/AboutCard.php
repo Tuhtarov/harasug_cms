@@ -16,7 +16,7 @@ class AboutCard extends Model
     use hasSlug;
 
     protected $table = 'about_cards';
-    protected $fillable = ['title', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'content'];
 
 
     public function getSlugOptions(): SlugOptions

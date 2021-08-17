@@ -13,6 +13,6 @@
                 </li>
             @endforeach
         </ul>
-        <a class="question-read-more primary-link" href="#">Показать все ответы</a>
+        <a class="question-read-more primary-link" href="{{route('qa.index')}}">Показать все ответы</a>
     </div>
 </section>

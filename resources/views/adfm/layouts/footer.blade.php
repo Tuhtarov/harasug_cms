@@ -8,9 +8,9 @@
 <div class="wrapper">
     <div class="footer-main">
         <div class="footer-head">
-            <a href="#"><img class="footer-logo" src="{{asset('dist/img/icon/logo.svg')}}"
-                             alt="Логотип 'Хара Суг'"
-                             height="93" width="103"></a>
+            <a href="{{route('adfm.show.main-page')}}">
+                <img class="footer-logo" src="{{asset('dist/img/icon/logo.svg')}}" alt="Логотип 'Хара Суг'"height="93" width="103">
+            </a>
             <div class="footer-confidential-info">
                 <p>&copy; 2020. Все права защищены.</p>
                 <a href="#">Политика конфиденциальности.</a>
@@ -22,24 +22,24 @@
                 <li class="footer-navigation-item">
                     <ul class="footer-navigation-sublist">
                         <li>О нас</li>
-                        <li><a href="#">Галерея</a></li>
-                        <li><a href="#">Отзывы</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="{{route('gallery.index')}}">Галерея</a></li>
+                        <li><a href="{{route('comment.index')}}">Отзывы</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
                     </ul>
                 </li>
                 <li class="footer-navigation-item">
                     <ul class="footer-navigation-sublist">
                         <li>Услуги</li>
                         <li><a href="#">Проживание</a></li>
-                        <li><a href="#">Ресторан</a></li>
-                        <li><a href="#">Отдых</a></li>
+                        <li><a href="{{route('cafe.index')}}">Ресторан</a></li>
+                        <li><a href="{{route('chill.index')}}">Отдых</a></li>
                     </ul>
                 </li>
                 <li class="footer-navigation-item">
                     <ul class="footer-navigation-sublist">
                         <li>Клиенту</li>
-                        <li><a href="#">Бронирование</a></li>
-                        <li><a href="#">Вопрос-ответ</a></li>
+                        <li><a href="{{route('reservation.index')}}">Бронирование</a></li>
+                        <li><a href="{{route('qa.index')}}">Вопрос-ответ</a></li>
                         <li><a href="#">Блог</a></li>
                     </ul>
                 </li>

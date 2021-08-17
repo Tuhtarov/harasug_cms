@@ -10,5 +10,7 @@ class QuestionAnswer extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'questions_answers';
+    protected $guarded = false;
 }

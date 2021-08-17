@@ -1,4 +1,4 @@
-@extends('adfm::public.layout')
+@extends('adfm.public.layout')
 @section('meta-title', $page->title)
 @section('meta-description', $page->meta != null && $page->meta['description'] != null ? $page->meta['description'] : "Этно-культурная база отдыха Харасуг")
 

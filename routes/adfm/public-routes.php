@@ -3,9 +3,48 @@
 use App\Http\Controllers\Modules\Cafe\CafeController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\Modules\Cafe', 'middleware' => ['web']], function () {
-    Route::get('/cafe', [CafeController::class, 'index'])->name('cafe.index');
-});
+/* Роуты для кафе. */
+Route::name('cafe.')
+    ->namespace('App\Http\Controllers\Modules\Cafe')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/cafe', [CafeController::class, 'index'])->name('index');
+    });
+
+/* Роуты для галереи. */
+Route::name('gallery.')
+    ->namespace('App\Http\Controllers\Modules\Gallery')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/gallery', 'IndexController')->name('index');
+        Route::get('/gallery/{slug}', 'ShowController')->name('show');
+    });
+
+/* Роуты для отдыха. */
+Route::name('chill.')
+    ->namespace('App\Http\Controllers\Modules\Chill')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/chill', 'IndexController')->name('index');
+        Route::get('/chill/{slug}', 'ShowController')->name('show');
+    });
+
+/* Роуты для бронирования. */
+Route::name('reservation.')
+    ->namespace('App\Http\Controllers\Modules\Reservation')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/reservation', 'IndexController')->name('index');
+    });
+
+/* Роуты для отзывов. */
+Route::name('comment.')
+    ->namespace('App\Http\Controllers\Modules\Comment')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/comments', 'IndexController')->name('index');
+        Route::post('/comments/create', 'CreateController')->name('create');
+    });
 
 /* Роуты для новостей. */
 Route::group(['namespace' => 'App\Http\Controllers\Site'], function () {
@@ -13,26 +52,34 @@ Route::group(['namespace' => 'App\Http\Controllers\Site'], function () {
     Route::get('/news/{year}/{month}/{day}/{slug}', 'NewsController@showNewsPage')->name('adfm.show.news-page');
 });
 
-/* Роуты для комментариев. */
-Route::group(['namespace' => 'App\Http\Controllers\Modules\Comment', 'middleware' => ['web']], function () {
-    Route::get('/comments', 'IndexController')->name('comment.index');
-    Route::post('/comments/create', 'CreateController')->name('comment.create');
-});
+/* Роуты для юрт. */
+Route::name('home.')
+    ->namespace('App\Http\Controllers\Modules\Home')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/home/{slug}', 'ShowController')->name('show');
+    });
 
-/* Роуты для отдыха. */
-Route::group(['name' => 'chill.', 'namespace' => 'App\Http\Controllers\Modules\Chill', 'middleware' => ['web']], function () {
-    Route::get('/chill', 'IndexController')->name('index');
-    Route::get('/chill/{slug}', 'ShowController')->name('show');
-});
+/* Роуты для about. */
+Route::name('about.')
+    ->namespace('App\Http\Controllers\Modules\About')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/about/{slug}', 'ShowController')->name('show');
+    });
 
-/* Роуты для отдыха. */
-Route::group(['name' => 'gallery.', 'namespace' => 'App\Http\Controllers\Modules\Gallery', 'middleware' => ['web']], function () {
-    Route::get('/gallery', 'IndexController')->name('index');
-    Route::get('/gallery/{slug}', 'ShowController')->name('show');
-});
 
+/* Роуты для вопросов-ответов. */
+Route::name('qa.')
+    ->namespace('App\Http\Controllers\Modules\Qa')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::get('/qa', 'IndexController')->name('index');
+    });
+
+
+/* Роуты для статичных страниц. */
 Route::group(['namespace' => 'App\Http\Controllers\Site', 'middleware' => ['web']], function () {
-    //генератор страниц
     Route::get('/', 'PageController@showMainPage')->name('adfm.show.main-page');
     Route::get('/{slug}', 'PageController@showPage')->name('adfm.show.page');
 });
