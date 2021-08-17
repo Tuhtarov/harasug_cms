@@ -1,13 +1,15 @@
-<form class="control-form" method="POST" action="#">
+<form class="control-form" method="POST" action="{{route('message.create')}}">
+    @csrf
     <div class="control-row">
         <div class="control-column">
             <input name="message[name]" class="control-field" required placeholder="Имя"
                    type="text" aria-label="Поле для ввода имени">
             <input name="message[phone]" class="control-field" required placeholder="Телефон"
-                   type="text" aria-label="Поле для ввода номера телефона">
+                   type="tel" aria-label="Поле для ввода номера телефона" max="12" min="12">
             <input name="message[email]" class="control-field" required placeholder="E-mail"
-                   type="text" aria-label="Поле для ввода электронной почты">
-            <textarea name="message[message]" class="control-textarea" placeholder="Сообщение" rows="6" cols="12" required></textarea>
+                   type="email" aria-label="Поле для ввода электронной почты" max="254" min="3">
+            <textarea name="message[message]" class="control-textarea" placeholder="Сообщение" rows="6" cols="12"
+                      minlength="6" required></textarea>
         </div>
         <div class="control-column flex-stretch">
             <div class="contacts-info flex-grow-1">
@@ -30,6 +32,6 @@
         </div>
     </div>
     <div class="control-row">
-        <button class="control-btn primary-btn" type="button">Отправить</button>
+        <button class="control-btn primary-btn" type="submit">Отправить</button>
     </div>
 </form>

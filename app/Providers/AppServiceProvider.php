@@ -9,6 +9,7 @@ use App\Contracts\Gallery\IGallery;
 use App\Contracts\Index\IAbout;
 use App\Contracts\Index\IHome;
 use App\Contracts\Index\IQuestionAnswer;
+use App\Contracts\Message\IMessage;
 use App\Services\Chill\ChillService;
 use App\Services\Gallery\GalleryService;
 use App\Services\Index\AboutService;
@@ -16,6 +17,7 @@ use App\Services\Cafe\CafeService;
 use App\Services\Index\HomeService;
 use App\Services\Index\QaService;
 use App\Services\Comment\CommentService;
+use App\Services\Message\MessageService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Галерея
         $this->app->singleton(IGallery::class, GalleryService::class);
+
+        //Сообщения
+        $this->app->singleton(IMessage::class, MessageService::class);
     }
 
     /**

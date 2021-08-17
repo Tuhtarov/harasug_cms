@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             SeederComment::class,
             SeederNews::class,
             SeederChill::class,
-            SeederGallery::class
+            SeederGallery::class,
+            SeederMessage::class
         ]);
     }
 }

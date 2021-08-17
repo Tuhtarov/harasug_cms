@@ -69,6 +69,14 @@ Route::name('about.')
     });
 
 
+/* Роуты для обратной связи. */
+Route::name('message.')
+    ->namespace('App\Http\Controllers\Modules\Message')
+    ->middleware(['web'])
+    ->group(function () {
+        Route::post('/message/create', 'CreateController')->name('create');
+    });
+
 /* Роуты для вопросов-ответов. */
 Route::name('qa.')
     ->namespace('App\Http\Controllers\Modules\Qa')
@@ -76,7 +84,6 @@ Route::name('qa.')
     ->group(function () {
         Route::get('/qa', 'IndexController')->name('index');
     });
-
 
 /* Роуты для статичных страниц. */
 Route::group(['namespace' => 'App\Http\Controllers\Site', 'middleware' => ['web']], function () {

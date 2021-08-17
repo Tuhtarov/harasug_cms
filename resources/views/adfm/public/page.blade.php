@@ -19,7 +19,7 @@
                     @if($page->title == "Контакты")
                         <h2 class="content-subtitle">Напишите нам</h2>
                         <div class="content-form">
-                            @include('adfm.components.forms.writeus')
+                            @include('adfm.components.forms.message')
                         </div>
                     @endif
                     @if($page->title == "Отзывы")
