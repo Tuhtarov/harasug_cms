@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Modules\Cafe\CafeController;
 use Illuminate\Support\Facades\Route;
 
 /* Роуты для кафе. */
@@ -8,7 +7,7 @@ Route::name('cafe.')
     ->namespace('App\Http\Controllers\Modules\Cafe')
     ->middleware(['web'])
     ->group(function () {
-        Route::get('/cafe', [CafeController::class, 'index'])->name('index');
+        Route::get('/cafe', 'IndexController')->name('index');
     });
 
 /* Роуты для галереи. */

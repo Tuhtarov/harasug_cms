@@ -61,7 +61,9 @@
                                         </div>
                                         <div class="menu-section-item-block-price">
                                             <p class="menu-section-item-block-price-value"
-                                               data-currency="Р">{{$record->price}}</p>
+                                               @if($record->price != null)data-currency="Р"@endif>
+                                                {{$record->price}}
+                                            </p>
                                             <p class="menu-section-item-block-price-weight">{{$record->weight}}</p>
                                         </div>
                                     </li>

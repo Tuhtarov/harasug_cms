@@ -12,6 +12,7 @@ class CafeRecord extends Model
     use SoftDeletes;
 
     protected $table = 'cafe_records';
+    public $timestamps = false;
     protected $guarded = false;
 
     public function cafe_category()

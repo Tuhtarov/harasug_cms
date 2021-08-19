@@ -16,6 +16,7 @@ class CreateCafeTypesTable extends Migration
         Schema::create('cafe_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->softDeletes();
         });
     }

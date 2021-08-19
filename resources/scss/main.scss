@@ -2081,17 +2081,72 @@ a {
 }
 
 //================Blog, Chill, gallery -pages=================
+.mt-1 {
+    margin-top: 10px;
+}
+.mt-2 {
+    margin-top: 20px;
+}
+.mt-3 {
+    margin-top: 30px;
+}
+.mb-1 {
+    margin-bottom: 10px;
+}
+.mb-2 {
+    margin-bottom: 20px;
+}
+.mt-3 {
+    margin-bottom: 30px;
+}
+
+.content-nav {
+    display: flex;
+    &.items-a-c {
+        justify-content: center;
+    }
+    &.items-a-s {
+        justify-content: flex-start;
+    }
+    &.items-a-e {
+        justify-content: flex-end;
+    }
+    .item-a-c {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .item-a-s {
+        margin-right: auto;
+    }
+    .item-a-e {
+        margin-left: auto;
+    }
+}
 
 .btn {
-    padding: 5px 10px;
-    border-radius: 15px;
+    display: inline-block;
+    min-width: 150px;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: .8em 1.2em;
+    cursor: pointer;
 
     &-primary {
-        background-color: black;
+        background-color: $basic_yellow;
     }
 
-    &-light {
+    &-white {
         background-color: white;
+    }
+
+    &:hover {
+        opacity: 1;
+        background: #ff9d00;
+    }
+
+    &:active {
+        opacity: .7;
+        box-shadow: 1px 1px 3px black;
     }
 }
 

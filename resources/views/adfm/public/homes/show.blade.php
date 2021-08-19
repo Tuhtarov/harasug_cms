@@ -7,6 +7,9 @@
         <div class="content-body">
             <div class="wrapper">
                 {!!$home->description!!}
+                <div class="content-nav">
+                    <a class="btn btn-primary mt-3 item-a-c" href="{{route('reservation.index')}}">Забронировать</a>
+                </div>
             </div>
         </div>
     </section>

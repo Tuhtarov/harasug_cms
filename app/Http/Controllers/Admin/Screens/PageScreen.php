@@ -29,7 +29,6 @@ class PageScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()

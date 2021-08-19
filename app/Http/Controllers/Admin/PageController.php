@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Screens\PageScreen;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Adfm\Page;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -56,7 +56,7 @@ class PageController extends Controller
        Page::destroy($id);
        return redirect()->route('adfm.pages.index');
     }
-    
+
     /**
      * Восстановление страницы
      */

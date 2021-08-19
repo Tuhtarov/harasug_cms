@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CafeType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,12 +15,15 @@ class CafeTypes extends Seeder
      */
     public function run()
     {
-        DB::table('cafe_types')->insert([
+        $cafe = CafeType::create([
             'name' => "Европейская кухня"
         ]);
-        DB::table('cafe_types')->insert([
+        $cafe->save();
+
+        $cafe = CafeType::create([
             'name' => "Национальная кухня",
             'message' => "Национальные блюда хакасской кухни готовим по предварительным заказам"
         ]);
+        $cafe->save();
     }
 }

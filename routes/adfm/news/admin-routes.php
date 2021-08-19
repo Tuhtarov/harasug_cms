@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin')->group(function () {
     Route::get('/news', 'NewsController@index')->name('adfm.news.index');
     Route::get('/news/create', 'NewsController@create')->name('adfm.news.create');

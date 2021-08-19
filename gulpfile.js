@@ -25,11 +25,12 @@ function css() {
 }
 
 function watch() {
-    return gulp.watch('./resources/css/**/*.css', css)
+    // return gulp.watch('./resources/css/**/*.css', css)
+    return gulp.watch('./resources/css/*.css', css)
 }
 
 let build = gulp.parallel(css)
-let dev = gulp.series(clean, css, watch)
+let dev = gulp.series(css, watch)
 
 //режим сборки с удалением старых файлов
 gulp.task('cleanBuild', gulp.series(clean, build))
