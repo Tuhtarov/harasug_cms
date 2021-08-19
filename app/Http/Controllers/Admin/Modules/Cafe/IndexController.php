@@ -11,7 +11,7 @@ class IndexController extends BaseController
     {
         $type = CafeType::where('slug',  $cafeType)->firstOrFail();
 
-        $paginatedCollection = $this->service->getRecordsByTypeId($type->id, true, 3);
+        $paginatedCollection = $this->service->getRecordsByTypeId($type->id, false, 3);
 
         IndexScreen::index($type->name, $paginatedCollection);
     }

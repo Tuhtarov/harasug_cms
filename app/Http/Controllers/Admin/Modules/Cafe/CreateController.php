@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Screens\Cafe\CreateScreen;
 class CreateController extends BaseController {
     public function __invoke()
     {
+        //массивы для полей с всплывающим списоком
         $cafe_types = $this->service->getCafeTypes()->toArray();
         $categories = $this->service->getCategories()->toArray();
 

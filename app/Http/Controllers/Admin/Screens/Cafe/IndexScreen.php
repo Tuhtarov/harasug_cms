@@ -63,7 +63,7 @@ class IndexScreen
 
         //КОЛОНКА РЕДАКТИРОВАНИЯ
         $screen->form->addField(
-            TableField::make('', '')
+            TableField::make('delete', '')
                 ->link(function ($model) {
                     echo Link::make('Изменить')->route('adfm.feedbacks.edit', ['id' => $model->id])->render();
                 })
@@ -73,7 +73,7 @@ class IndexScreen
         $screen->form->addField(
             TableField::make('', '')
                 ->link(function ($model) {
-                    echo Link::make('Удалить')->route('adfm.feedbacks.destroy', ['id' => $model->id])->render();
+                    echo Link::make('Удалить')->route('admin.cafe.record.delete', ['id' => $model->id])->render();
                 })
         );
 

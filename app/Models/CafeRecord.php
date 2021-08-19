@@ -13,7 +13,14 @@ class CafeRecord extends Model
 
     protected $table = 'cafe_records';
     public $timestamps = false;
-    protected $guarded = false;
+    protected $fillable = ['title', 'description', 'price', 'weight', 'cafe_category_id', 'deleted_at'];
+
+    /**
+     * Атрибуты, которые должны быть преобразованы в дату
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     public function cafe_category()
     {

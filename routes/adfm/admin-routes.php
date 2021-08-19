@@ -84,6 +84,14 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
 
             Route::get('/{cafeType}', 'IndexController')
                 ->name('index');
+
+            Route::delete('/delete/record/{id}', 'DeleteController@removeRecord')
+                ->whereNumber('id')
+                ->name('record.delete');
+
+            Route::delete('/delete/category/{id}', 'DeleteController@removeCategory')
+                ->whereNumber('id')
+                ->name('category.delete');
         });
 
     /* Роуты для отдыха. */

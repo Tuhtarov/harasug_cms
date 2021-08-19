@@ -104,8 +104,9 @@ class CafeService implements ICafe
     function getRecordsByTypeId(int $cafeTypeId, bool $withTrashed = false, int $perPage = null)
     {
         $result = CafeRecord::withTrashed($withTrashed)
-            ->join('cafe_categories', 'cafe_category_id', '=', "cafe_categories.id")
-            ->where('cafe_categories.cafe_type_id', '<>', $cafeTypeId);
+            ->join('cafe_categories', 'cafe_records.cafe_category_id', '=', "cafe_categories.id")
+            ->where('cafe_categories.cafe_type_id', '<>', $cafeTypeId)
+            ->select('cafe_records.*');
 
         if ($perPage != null) {
             return $result->paginate($perPage);
@@ -126,18 +127,18 @@ class CafeService implements ICafe
     // Возвращает все категории (опционально)
     function getCategories(bool $withTrashed = false, int $byCafeId = null)
     {
-        $categories = CafeCategory::withTrashed($withTrashed)
-        ->join('cafe_types', 'cafe_categories.cafe_type_id', '=', 'cafe_types.id')
-        ->addSelect([
-            'cafe_categories.*',
-            DB::raw('cafe_types.name as cafe_name')
-        ]);
+        $categories = CafeCategory::withTrashed($withTrashed);
+//        ->join('cafe_types', 'cafe_categories.cafe_type_id', '=', 'cafe_types.id')
+//        ->addSelect([
+//            'cafe_categories.*',
+//            DB::raw('cafe_types.name as cafe_name')
+//        ]);
 
         if ($byCafeId) {
             $categories->where('cafe_type_id', $byCafeId);
         }
 
-        return $categories->get();
+        return $categories->get()->unique('name');
     }
 
     //сохранение товара (блюда) в базу
