@@ -2,8 +2,8 @@
 
 namespace App\Contracts\Cafe;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ICafe {
 
@@ -26,7 +26,7 @@ interface ICafe {
      * Возвращает все имеющиеся кухни.
      * @return mixed
      */
-    function getCafeTypes();
+    function getCafeTypes(int $perPage = null);
 
     /**
      * Возвращает все категории.
@@ -40,5 +40,28 @@ interface ICafe {
      */
     function getCategories(bool $withTrashed = false, int $byCafeId = null);
 
+    /**
+     * Сохраняет блюдо в базу.
+     * @param array $recordData
+     * @return mixed
+     */
     public function storeCafeRecord(array $recordData);
+
+    /**
+     * Сохраняет категорию в базу, в массиве должен быть ID кафе для которой создаётся категория, и название категории.
+     * @param array $categoryData
+     * @return mixed
+     */
+    public function storeCafeCategory(array $categoryData);
+
+    public function getRecordForEdit(int $recordId) : Model;
+
+    public function getCategoriesForIndex(int $perPage = 20) : LengthAwarePaginator;
+
+    public function updateCafeType(int $cafeTypeId, array $cafeTypeData);
+
+    public function updateCafeCategory(int $categoryId, array $cafeCategoryData);
+
+    public function updateCafeRecord(int $recordId, array $recordData);
+
 }

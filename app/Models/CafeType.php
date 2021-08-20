@@ -16,7 +16,7 @@ class CafeType extends Model
     use HasSlug;
 
     protected $table = 'cafe_types';
-    protected $guarded = false;
+    protected $fillable = ['name', 'message'];
     public $timestamps = false;
 
     public function cafe_category()

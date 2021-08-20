@@ -76,22 +76,36 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
         ->name('cafe.')
         ->namespace('App\Http\Controllers\Admin\Modules\Cafe')
         ->group(function () {
-            Route::get('/create', 'CreateController')
-                ->name('create');
 
-            Route::post('/create/store', 'StoreController')
-                ->name('store');
+            /*Роуты для блюд*/
+            Route::prefix('/record')->name('record.')
+                ->group(function () {
+                    Route::get('/create', 'CreateController@createRecord')->name('create');
+                    Route::post('/store', 'StoreController@storeRecord')->name('store');
+                    Route::post('/restore/{id}', 'RestoreController@restoreRecord')->name('restore')->whereNumber('id');
+                    Route::get('/edit/{id}', 'EditController@editRecord')->name('edit')->whereNumber('id');
+                    Route::delete('/delete/{id}', 'DeleteController@deleteRecord')->name('delete')->whereNumber('id');
+                    Route::patch('/update/{id}', 'UpdateController@updateRecord')->name('update')->whereNumber('id');
 
-            Route::get('/{cafeType}', 'IndexController')
-                ->name('index');
+                    Route::get('/{cafeType}', 'IndexController@indexRecord')->name('index');
+                });
 
-            Route::delete('/delete/record/{id}', 'DeleteController@removeRecord')
-                ->whereNumber('id')
-                ->name('record.delete');
+            /*Роуты для категорий*/
+            Route::prefix('/category')->name('category.')
+                ->group(function () {
+                    Route::get('/', 'IndexController@indexCategory')->name('index');
+                    Route::get('/create', 'CreateController@createCategory')->name('create');
+                    Route::post('/store', 'StoreController@storeCategory')->name('store');
+                    Route::post('/restore/{id}', 'RestoreController@restoreCategory')->name('restore')->whereNumber('id');
+                    Route::get('/edit/{id}', 'EditController@editCategory')->name('edit')->whereNumber('id');
+                    Route::delete('/delete/{id}', 'DeleteController@deleteCategory')->name('delete')->whereNumber('id');
+                    Route::patch('/update/{id}', 'UpdateController@updateCategory')->name('update')->whereNumber('id');
+                });
 
-            Route::delete('/delete/category/{id}', 'DeleteController@removeCategory')
-                ->whereNumber('id')
-                ->name('category.delete');
+            /*Роуты для видов кафе*/
+            Route::get('/', 'IndexController@indexCafe')->name('index');
+            Route::get('/edit/{id}', 'EditController@editCafe')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController@updateCafe')->name('update')->whereNumber('id');
         });
 
     /* Роуты для отдыха. */

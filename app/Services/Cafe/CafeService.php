@@ -6,17 +6,10 @@ use App\Contracts\Cafe\ICafe;
 use App\Models\CafeCategory;
 use App\Models\CafeRecord;
 use App\Models\CafeType;
-use Doctrine\DBAL\Types\IntegerType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Client\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Integer;
-use phpDocumentor\Reflection\Types\True_;
-use stdClass;
-use function React\Promise\all;
 
 /**
  * Class Cafe реализующий интерфейс CafeInterface.
@@ -31,13 +24,13 @@ class CafeService implements ICafe
 
     /**
      * Возвращает все категории с их продуктами, которые принадлежат идентификатору кухни.
-     * @param int $id
+     * @param int $cafeTypeId
      * @return array|array[]
      */
-    private function getCategoriesByTypeId(int $id): array
+    private function getCategoriesByTypeId(int $cafeTypeId): array
     {
         $categoryWithProducts = [];
-        $categories = $this->categories->where('cafe_type_id', '=', $id);
+        $categories = $this->categories->where('cafe_type_id', '=', $cafeTypeId);
 
         foreach ($categories as $category) {
             $categoryWithProducts += [
@@ -104,9 +97,9 @@ class CafeService implements ICafe
     function getRecordsByTypeId(int $cafeTypeId, bool $withTrashed = false, int $perPage = null)
     {
         $result = CafeRecord::withTrashed($withTrashed)
-            ->join('cafe_categories', 'cafe_records.cafe_category_id', '=', "cafe_categories.id")
-            ->where('cafe_categories.cafe_type_id', '<>', $cafeTypeId)
-            ->select('cafe_records.*');
+            ->join('cafe_categories', 'cafe_records.cafe_category_id', "cafe_categories.id")
+            ->where('cafe_categories.cafe_type_id', $cafeTypeId)
+            ->select(['cafe_records.*', 'cafe_categories.name as cafe_category_name']);
 
         if ($perPage != null) {
             return $result->paginate($perPage);
@@ -117,10 +110,14 @@ class CafeService implements ICafe
 
     /**
      * Возвращает все имеющиеся виды кафе
-     * @return CafeType[]|Collection|mixed
+     * @return CafeType[]|Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function getCafeTypes()
+    function getCafeTypes(int $perPage = null)
     {
+        if ($perPage != null) {
+            return CafeType::withTrashed()->paginate($perPage);
+        }
+
         return CafeType::all();
     }
 
@@ -141,8 +138,13 @@ class CafeService implements ICafe
         return $categories->get()->unique('name');
     }
 
+    public function updateCafeRecord(int $recordId, array $recordData)
+    {
+        $this->storeCafeRecord($recordData, $recordId);
+    }
+
     //сохранение товара (блюда) в базу
-    public function storeCafeRecord(array $recordData)
+    public function storeCafeRecord(array $recordData, int $recordUpdateId = null)
     {
         //если пришедшее значение ключа cafe_category - числовое, но в строке, то кастим его в integer
         if (is_numeric($recordData['cafe_category'])) {
@@ -160,7 +162,13 @@ class CafeService implements ICafe
             );
             //убираем лишнее
             unset($recordData['cafe_type_id'], $recordData['cafe_category']);
-            $result = CafeRecord::create($recordData)->save();
+
+            if($recordUpdateId == null) {
+                $result = CafeRecord::create($recordData)->save();
+            } else {
+                $result = CafeRecord::findOrFail($recordUpdateId)->update($recordData);
+            }
+
             Db::commit();
 
             return $result;
@@ -201,5 +209,43 @@ class CafeService implements ICafe
         }
 
         return $category->id;
+    }
+
+    public function storeCafeCategory(array $categoryData)
+    {
+        $category = CafeCategory::firstOrCreate($categoryData);
+        return $category->exists();
+    }
+
+    public function getRecordForEdit(int $recordId): Model
+    {
+        return CafeRecord::withTrashed()
+            ->join('cafe_categories', 'cafe_records.cafe_category_id', '=', "cafe_categories.id")
+            ->where('cafe_records.id', $recordId)
+            ->addSelect([
+                'cafe_records.*',
+                'cafe_categories.cafe_type_id',
+                'cafe_records.cafe_category_id as cafe_category'
+            ])->firstOrFail();
+    }
+
+    public function getCategoriesForIndex(int $perPage = 20): LengthAwarePaginator
+    {
+        return CafeCategory::withTrashed()
+            ->join('cafe_types', 'cafe_categories.cafe_type_id', '=', 'cafe_types.id')
+            ->select([
+                'cafe_categories.*',
+                'cafe_types.name as cafe_name'
+            ])->paginate($perPage);
+    }
+
+    public function updateCafeType(int $cafeTypeId, array $cafeTypeData)
+    {
+        return CafeType::findOrFail($cafeTypeId)->update($cafeTypeData);
+    }
+
+    public function updateCafeCategory(int $categoryId, array $cafeCategoryData)
+    {
+        return CafeCategory::findOrFail($categoryId)->update($cafeCategoryData);
     }
 }
