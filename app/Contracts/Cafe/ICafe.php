@@ -14,6 +14,14 @@ interface ICafe {
     function getRecordsForPublicCafe() : object;
 
     /**
+     * Метод принимает ID категории, находит эту категорию в базе,
+     * и через внешний ключ определяет принадлежащую ей кухню, далее возвращает SLUG этой кухни.
+     * @param int $categoryId
+     */
+    function getSlugCafeTypeByCategoryId(int $categoryId) : string;
+
+
+    /**
      * Достаёт товары для админки по id кафе.
      *
      * @param int $cafeTypeId

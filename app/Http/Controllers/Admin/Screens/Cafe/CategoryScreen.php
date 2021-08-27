@@ -45,21 +45,13 @@ class CategoryScreen
 
         $screen->form->addField(
             TableField::make('name', 'Наименование')
-        );
-
-        $screen->form->addField(
-            TableField::make('image', 'Изображение')
+                ->link(function ($model) {
+                    echo Link::make($model->name)->route('admin.cafe.category.edit', ['id' => $model->id])->render();
+                })
         );
 
         $screen->form->addField(
             TableField::make('cafe_name', 'Кухня')
-        );
-
-        $screen->form->addField(
-            TableField::make('', '')
-                ->link(function ($model) {
-                    echo Link::make('Изменить')->route('admin.cafe.category.edit', ['id' => $model->id])->render();
-                })
         );
 
         $screen->form->addField(
@@ -74,7 +66,7 @@ class CategoryScreen
         );
 
         $screen->form->buttons([
-            Link::make('Добавить категорию')->class('button')->icon('note')->route('admin.cafe.category.create')
+            Link::make('Добавить')->class('button')->icon('note')->route('admin.cafe.category.create')
         ]);
 
         $screen->form->build();
@@ -93,12 +85,12 @@ class CategoryScreen
         ]);
 
         $screen->form->route = route('admin.cafe.category.store');
-        $screen->form->title = 'Добавление категории';
+        $screen->form->title = 'Создание категории';
 
         $screen->form->columns = self::getFields();
 
         $screen->form->buttons([
-            Button::make('Добавить')->icon('save')->submit(),
+            Button::make('Сохранить')->icon('save')->submit(),
         ]);
 
         $screen->form->build();
@@ -125,6 +117,7 @@ class CategoryScreen
 
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->submit(),
+            Button::make('Удалить')->icon('trash')->route('admin.cafe.category.delete')->canSee($screen->form->isModelExists),
         ]);
 
         $screen->form->build();

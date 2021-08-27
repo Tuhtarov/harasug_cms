@@ -30,10 +30,21 @@ Route::name('chill.')
 
 /* Роуты для бронирования. */
 Route::name('reservation.')
+    ->prefix('reservation')
     ->namespace('App\Http\Controllers\Modules\Reservation')
     ->middleware(['web'])
     ->group(function () {
-        Route::get('/reservation', 'IndexController')->name('index');
+        Route::get('/', 'IndexController')->name('index');
+
+        Route::get('/search', 'SearchController@showAvailableHomes')->name('search');
+
+        Route::post('/check', 'CheckController@checkHome')->name('check-home');
+        Route::post('/check/additional', 'CheckController@checkAdditional')->name('check-additional');
+
+        Route::get('/confirm/show', 'ConfirmController@showForm')->name('confirm.show');
+        Route::get('/confirm/additional/show', 'ConfirmController@showAdditional')->name('confirm.additional.show');
+
+        Route::post('/booking', 'BookingController')->name('booking');
     });
 
 /* Роуты для отзывов. */
@@ -47,8 +58,10 @@ Route::name('comment.')
 
 /* Роуты для новостей. */
 Route::group(['namespace' => 'App\Http\Controllers\Site'], function () {
-    Route::get('/news', 'NewsController@showNewsList')->name('adfm.show.news-list');
-    Route::get('/news/{year}/{month}/{day}/{slug}', 'NewsController@showNewsPage')->name('adfm.show.news-page');
+    Route::get('/news', 'NewsController@showNewsList')
+        ->name('adfm.show.news-list');
+    Route::get('/news/{year}/{month}/{day}/{slug}', 'NewsController@showNewsPage')
+        ->name('adfm.show.news-page');
 });
 
 /* Роуты для юрт. */

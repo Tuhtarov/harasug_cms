@@ -7,12 +7,16 @@ use App\Models\Message;
 
 class MessageService implements IMessage
 {
-    function getMessages()
+    function getMessages(bool $onlyTrashed = false)
     {
-        return Message::all();
+        if ($onlyTrashed) {
+            return Message::onlyTrashed()->paginate(10);
+        }
+
+        return Message::withTrashed(false)->paginate(10);
     }
 
-    function createMessage(array $message) : bool
+    function createMessage(array $message): bool
     {
         $message = new Message($message);
         return $message->save();

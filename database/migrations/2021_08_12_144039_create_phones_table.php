@@ -17,7 +17,6 @@ class CreatePhonesTable extends Migration
             $table->unsignedSmallInteger('id')->autoIncrement();
             $table->char('phone', '12')->unique();
             $table->string('role')->default('Гость');
-            $table->boolean('is_published')->default(true);
             $table->softDeletes();
         });
     }

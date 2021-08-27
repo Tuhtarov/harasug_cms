@@ -7,6 +7,6 @@ namespace App\Contracts\Index;
  * @package App\Contracts\Index
  */
 interface IAbout {
-    public function getAboutItems();
+    public function getAboutItems(bool $forAdmin = false);
     public function getAboutBySlug(string $slug);
 }

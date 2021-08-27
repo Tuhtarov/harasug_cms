@@ -39,7 +39,7 @@ class NewsScreen
         ]);
         $screen->form->title = 'Новости';
         $screen->form->addField(
-            TableField::make('title', 'Название страницы')
+            TableField::make('title', 'Заголовок')
                 ->link(function ($model) {
                     echo Link::make($model->title)->route('adfm.news.edit', ['id' => $model->id])
                         ->render();
@@ -68,7 +68,7 @@ class NewsScreen
         $screen->form->template('form-edit')->source([
             'news' => new News()
         ]);
-        $screen->form->title = 'Создание Новости';
+        $screen->form->title = 'Создание новости';
         $screen->form->route = route('adfm.news.store');
         $screen->form->columns = self::getFields();
         $screen->form->buttons([
@@ -85,7 +85,7 @@ class NewsScreen
         $screen->form->template('form-edit')->source([
                 'news' => News::findOrFail($screen->request->route('id'))
         ]);
-        $screen->form->title = 'Редактирование Новости';
+        $screen->form->title = 'Редактирование новости: ' . '"' . $screen->form->source['news']->title . '"';
         $screen->form->route = route('adfm.news.update', $screen->form->source['news']->id);
         $screen->form->columns = self::getFields();
         $screen->form->buttons([
@@ -100,13 +100,13 @@ class NewsScreen
         return [
             Column::make([
                 Input::make('news.title')
-                    ->title('Заголовок новости')
+                    ->title('Заголовок')
                     ->required()
                     ->placeholder('Например , объявление о нерабочих днях'),
 
                 Summernote::make('news.content')->title('Содержимое'),
 
-                Cropper::make('news.image')->title('Изображение') ,
+                Cropper::make('news.image')->title('Изображение (превью)') ,
             ]),
             Column::make([
                 Input::make('news.slug')

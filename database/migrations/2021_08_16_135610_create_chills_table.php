@@ -20,7 +20,6 @@ class CreateChillsTable extends Migration
             $table->unsignedSmallInteger('price')->nullable();
             $table->string('price_info')->nullable()->default('цена / час');
             $table->string('slug')->unique();
-            $table->dateTime('published_at');
             $table->timestamps();
             $table->softDeletes();
         });

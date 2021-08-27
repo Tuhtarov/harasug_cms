@@ -11,14 +11,14 @@ interface IComment {
      * Возможные значения аргумента mode:
      *
      * 1. public - получить коллекцию для отображения в гостевой части сайта. (не включая удалённые и скрытые записи)
-     * 2. admin - получить коллекцию для админки. (включая удалённые и скрытые записи)
+     * 2. admin - получить коллекцию для админки. (включая не опубликованные записи)
      * 3. trashed - получить коллекцию состоящую только из удалённых записей.
      * 4. no_published - получить коллекцию состоящую только из скрытых (не опубликованныъ) записей.
      *
      * @param string $mode значение по умолчанию: public
      * @return Collection
      */
-    public function getComments(string $mode = 'public') : Collection;
+    public function getComments(string $mode = 'public', int $perPageAdmin = 15, bool $onlyTrashed = false);
 
     /**
      * Принимает массив с данными:

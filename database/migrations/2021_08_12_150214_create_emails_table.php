@@ -17,7 +17,6 @@ class CreateEmailsTable extends Migration
             $table->unsignedSmallInteger('id')->autoIncrement();
             $table->char('email', '254')->unique();
             $table->string('role')->default('Гость');
-            $table->boolean('is_published')->default(true);
             $table->softDeletes();
         });
     }

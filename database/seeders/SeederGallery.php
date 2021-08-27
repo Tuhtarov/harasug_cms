@@ -17,24 +17,21 @@ class SeederGallery extends Seeder
         $gallery = Gallery::create([
             'title' => "Наши юрты",
             'content' => "Image 1. Image 2",
-            'slug' => "nashi_yurts",
-            'published_at' => '2021-11-11 11:11:11'
+            'slug' => "nashi_yurts"
         ]);
         $gallery->save();
 
         $gallery = Gallery::create([
             'title' => "Кафе",
             'content' => "Image 1. Image 2",
-            'slug' => "cafe",
-            'published_at' => '2021-08-11 10:12:11'
+            'slug' => "cafe"
         ]);
         $gallery->save();
 
         $gallery = Gallery::create([
             'title' => "Наша банька",
             'content' => "Image 1. Image 2",
-            'slug' => "nasha_banya",
-            'published_at' => '2021-11-08 11:09:11'
+            'slug' => "nasha_banya"
         ]);
         $gallery->save();
 
@@ -42,8 +39,7 @@ class SeederGallery extends Seeder
         $gallery = Gallery::create([
             'title' => "Наша природа",
             'content' => "Image 1. Image 2",
-            'slug' => "nasha_priroda",
-            'published_at' => '2021-11-09 11:09:11'
+            'slug' => "nasha_priroda"
         ]);
         $gallery->save();
 
@@ -51,16 +47,14 @@ class SeederGallery extends Seeder
         $gallery = Gallery::create([
             'title' => "Атмосфера",
             'content' => "Image 1. Image 2",
-            'slug' => "atmosfera",
-            'published_at' => '2021-11-07 11:09:11'
+            'slug' => "atmosfera"
         ]);
         $gallery->save();
 
         $gallery = Gallery::create([
             'title' => "Лучшее",
             'content' => "Image 1. Image 2",
-            'slug' => "best",
-            'published_at' => '2021-11-02 11:09:11'
+            'slug' => "best"
         ]);
         $gallery->save();
     }

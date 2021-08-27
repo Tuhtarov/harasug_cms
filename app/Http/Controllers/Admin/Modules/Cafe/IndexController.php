@@ -27,8 +27,8 @@ class IndexController extends BaseController
 
     public function indexCategory()
     {
-        $record = $this->service->getCategoriesForIndex(20);
+        $paginatedCollection = $this->service->getCategoriesForIndex(20);
 
-        CategoryScreen::index($record);
+        CategoryScreen::index($paginatedCollection);
     }
 }

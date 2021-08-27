@@ -111,9 +111,29 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
     /* Роуты для отдыха. */
     Route::prefix('/chill')
         ->name('chill.')
-        ->namespace('App\Http\Controllers\Modules\Chill')
+        ->namespace('App\Http\Controllers\Admin\Modules\Chill')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/store', 'StoreController')->name('store');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
+        });
+
+    /* Роуты для юрт. */
+    Route::prefix('/home')
+        ->name('home.')
+        ->namespace('App\Http\Controllers\Admin\Modules\Home')
+        ->group(function () {
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/store', 'StoreController')->name('store');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
         });
 
     /* Роуты для бронирования. */
@@ -121,60 +141,72 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
         ->name('reservation.')
         ->namespace('App\Http\Controllers\Modules\Reservation')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
-        });
-
-    /* Роуты для новостей. */
-    Route::prefix('/news')
-        ->name('news.')
-        ->namespace('App\Http\Controllers\Modules\News')
-        ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+//            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
         });
 
     /* Роуты для Галереи. */
     Route::prefix('/gallery')
         ->name('gallery.')
-        ->namespace('App\Http\Controllers\Modules\Gallery')
+        ->namespace('App\Http\Controllers\Admin\Modules\Gallery')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/store', 'StoreController')->name('store');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
         });
 
     /* Роуты для вопросов-ответов. */
     Route::prefix('/qa')
         ->name('qa.')
-        ->namespace('App\Http\Controllers\Modules\Qa')
+        ->namespace('App\Http\Controllers\Admin\Modules\Qa')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/store', 'StoreController')->name('store');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
         });
 
     /* Роуты для about. */
     Route::prefix('/about')
         ->name('about.')
-        ->namespace('App\Http\Controllers\Modules\About')
+        ->namespace('App\Http\Controllers\Admin\Modules\About')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController')->name('index');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/store', 'StoreController')->name('store');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
         });
 
     /* Роуты для отзывов. */
     Route::prefix('/comments')
-        ->name('comments.')
-        ->namespace('App\Http\Controllers\Modules\Comment')
+        ->name('comment.')
+        ->namespace('App\Http\Controllers\Admin\Modules\Comment')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController@withoutTrashed')->name('index');
+            Route::get('/trashed', 'IndexController@onlyTrashed')->name('index.trashed');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete');
+            Route::patch('/restore/{id}', 'RestoreController')->name('restore');
         });
 
     /* Роуты для сообщений. */
     Route::prefix('/messages')
-        ->name('messages.')
-        ->namespace('App\Http\Controllers\Modules\Message')
+        ->name('message.')
+        ->namespace('App\Http\Controllers\Admin\Modules\Message')
         ->group(function () {
-            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/', 'IndexController@withoutTrashed')->name('index');
+            Route::get('/trashed', 'IndexController@onlyTrashed')->name('index.trashed');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete');
+            Route::patch('/restore/{id}', 'RestoreController')->name('restore');
         });
 });
 
-
-
 //Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
-
-

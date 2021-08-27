@@ -98,46 +98,63 @@
                     банкет
                 </button>
             @else
-                <form class="primary-form" action="#" method="GET">
+                <form class="primary-form" action="{{route('reservation.search')}}" method="GET">
+{{--                    @csrf--}}
                     <div class="primary-form-row">
+{{--                        <label style="color: greenyellow; background: black">Выбор даты заезда--}}
                         <div class="primary-control">
-                            <input class="primary-control-backend vh" type="text" name="check[date_arrival]"
-                                   value="">
-                            <input id="date_arrival" class="primary-control-control vh"
-                                   aria-label="Выбор количества взрослых" type="checkbox">
-                            <label for="date_arrival" class="primary-control-datepicker icon calendar">Заезд
-                                01/05/2020</label>
-                            <div class="primary-control-datepicker-body"></div>
+
+                        <input class="primary-control-select" type="date" name="book[time_in]" required>
                         </div>
+{{--                        </label>--}}
+
+{{--                        <label style="color: greenyellow; background: black">Выбор даты отъезда--}}
                         <div class="primary-control">
-                            <input class="primary-control-backend vh" type="text" name="check[date_leaving]"
-                                   value="">
-                            <input id="date_leaving" class="primary-control-control vh"
-                                   aria-label="Выбор количества взрослых" type="checkbox">
-                            <label for="date_leaving" class="primary-control-datepicker icon calendar">Отъезд
-                                01/05/2020</label>
-                            <div class="primary-control-datepicker-body"></div>
+
+                        <input class="primary-control-select" type="date" name="book[time_out]" required>
                         </div>
+{{--                        </label>--}}
+                        {{--                        <div class="primary-control">--}}
+{{--                            <input class="primary-control-backend vh" type="text" name="book[date_arrival]"--}}
+{{--                                   value="">--}}
+{{--                            <input id="date_arrival" class="primary-control-control vh"--}}
+{{--                                   aria-label="Выбор количества взрослых" type="bookbox">--}}
+{{--                            <label for="date_arrival" class="primary-control-datepicker icon calendar">Заезд--}}
+{{--                                01/05/2020</label>--}}
+{{--                            <div class="primary-control-datepicker-body"></div>--}}
+{{--                        </div>--}}
+{{--                        <div class="primary-control">--}}
+{{--                            <input class="primary-control-backend vh" type="text" name="book[date_leaving]"--}}
+{{--                                   value="">--}}
+{{--                            <input id="date_leaving" class="primary-control-control vh"--}}
+{{--                                   aria-label="Выбор количества взрослых" type="bookbox">--}}
+{{--                            <label for="date_leaving" class="primary-control-datepicker icon calendar">Отъезд--}}
+{{--                                01/05/2020</label>--}}
+{{--                            <div class="primary-control-datepicker-body"></div>--}}
+{{--                        </div>--}}
                         <div class="primary-control">
-                            <input class="primary-control-backend vh" type="text" name="check[qty_adult]">
-                            <input class="primary-control-control vh" id="adult_select"
+                            <input class="primary-control-backend vh" type="text" name="book[qty_old]">
+                            <input id="adult_select" class="primary-control-control vh"
                                    aria-label="Выбор количества взрослых" type="checkbox">
-                            <label class="primary-control-select icon people" for="adult_select"></label>
+                            <label for="adult_select" class="primary-control-select icon people"></label>
                             <ul class="primary-control-items">
                                 <li class="primary-control-item" data-before="Взрослых">1</li>
                                 <li class="primary-control-item current" data-before="Взрослых">2</li>
                                 <li class="primary-control-item" data-before="Взрослых">3</li>
+                                <li class="primary-control-item" data-before="Взрослых">4</li>
                             </ul>
                         </div>
                         <div class="primary-control">
-                            <input class="primary-control-backend vh" type="text" name="check[qty_child]">
+                            <input class="primary-control-backend vh" type="text" name="book[qty_child]">
                             <input id="child_select" class="primary-control-control vh"
                                    aria-label="Выбор количества детей" type="checkbox">
                             <label for="child_select" class="primary-control-select icon people"></label>
                             <ul class="primary-control-items">
+                                <li class="primary-control-item" data-before="Детей">0</li>
                                 <li class="primary-control-item" data-before="Детей">1</li>
                                 <li class="primary-control-item current" data-before="Детей">2</li>
                                 <li class="primary-control-item" data-before="Детей">3</li>
+                                <li class="primary-control-item" data-before="Детей">4</li>
                             </ul>
                         </div>
                     </div>

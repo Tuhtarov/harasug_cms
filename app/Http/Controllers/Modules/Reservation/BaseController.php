@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Modules\Reservation;
 
 use App\Contracts\Index\IHome;
+use App\Contracts\Reservation\ReservationBase;
 use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
-    protected IHome $service;
+    protected IHome $homeService;
+    protected ReservationBase $mainService;
 
     /**
      * BaseController constructor.
-     * @param IHome $service
+     * @param IHome $homeService
+     * @param ReservationBase $mainService
      */
-    public function __construct(IHome $service)
+    public function __construct(IHome $homeService, ReservationBase $mainService)
     {
-        $this->service = $service;
+        $this->homeService = $homeService;
+        $this->mainService = $mainService;
     }
 
 }

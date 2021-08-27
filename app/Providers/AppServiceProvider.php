@@ -10,6 +10,7 @@ use App\Contracts\Index\IAbout;
 use App\Contracts\Index\IHome;
 use App\Contracts\Index\IQuestionAnswer;
 use App\Contracts\Message\IMessage;
+use App\Contracts\Reservation\ReservationBase;
 use App\Services\Chill\ChillService;
 use App\Services\Gallery\GalleryService;
 use App\Services\Index\AboutService;
@@ -18,6 +19,7 @@ use App\Services\Index\HomeService;
 use App\Services\Index\QaService;
 use App\Services\Comment\CommentService;
 use App\Services\Message\MessageService;
+use App\Services\Reservation\ReservationService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -52,6 +54,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Сообщения
         $this->app->singleton(IMessage::class, MessageService::class);
+
+        //Бронирование
+        $this->app->singleton(ReservationBase::class, ReservationService::class);
     }
 
     /**

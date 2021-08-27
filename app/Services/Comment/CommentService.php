@@ -5,7 +5,9 @@ namespace App\Services\Comment;
 use App\Contracts\Comment\IComment;
 use App\Models\Comment;
 use App\Models\Email;
+use App\Models\Message;
 use App\Models\Phone;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -18,38 +20,46 @@ class CommentService implements IComment
      * Возможные значения аргумента:
      *
      * 1. public - опубликованные и не удалённые;
-     * 2. admin - всё, включая удалённые и не опубликованные;
-     * 3. trashed - только удалённые;
-     * 4. no_published - только не опубликованные;
+     * 2. admin - всё, включая включая не опубликованные;
      */
-    private function initVariable(string $mode = 'public')
+    private function initVariable(string $mode = 'public', int $perPage = 15)
     {
         switch ($mode) {
             case 'public':
-                $this->comments = Comment::with(['phone', 'email'])
-                    ->where('is_published', '=', true)->get()->collect();
+                $this->comments = Comment::with(['phone', 'email'])->get()->collect();
                 break;
             case 'admin':
-                $this->comments = Comment::withTrashed()
-                    ->with(['phone', 'email'])->get()->collect();
+                $this->comments = Comment::withTrashed(false)->with(['phone', 'email'])->get()->collect();
                 break;
-            case 'trashed':
-                $this->comments = Comment::onlyTrashed()
-                    ->with(['phone', 'email'])->get()->collect();
-                break;
-            case 'no_published':
-                $this->comments = Comment::with(['phone', 'email'])
-                    ->where('is_published', '=', false)->get()->collect();
-                break;
-            default:
-                $this->comments = Comment::with(['phone', 'email'])->get()->collect();
         }
     }
 
-    public function getComments(string $mode = 'public'): Collection
+    public function getComments(string $mode = 'public', int $perPageAdmin = 15, bool $onlyTrashed = false)
     {
-        $this->initVariable($mode);
-        return $this->comments;
+        if ($mode != 'admin') {
+            $this->initVariable($mode);
+            return $this->comments;
+        }
+
+        return $this->getCommentsForAdmin($perPageAdmin, $onlyTrashed);
+    }
+
+    private function getCommentsForAdmin(int $perPage = 15, bool $onlyTrashed = false)
+    {
+        if ($onlyTrashed) {
+            $comments = Comment::onlyTrashed();
+        } else {
+            $comments = Comment::withTrashed(false);
+        }
+
+        return $comments
+            ->join('phones', 'comments.phone_id', 'phones.id')
+            ->join('emails', 'comments.email_id', 'emails.id')
+            ->select([
+                'comments.*',
+                'phones.phone',
+                'emails.email'
+            ])->paginate($perPage);
     }
 
     public function createComment(array $comment): bool
@@ -117,7 +127,8 @@ class CommentService implements IComment
         return $hasPhoneOrEmail;
     }
 
-    private function validateCommentOnInput($comment) : bool {
+    private function validateCommentOnInput($comment): bool
+    {
         return true;
     }
 }

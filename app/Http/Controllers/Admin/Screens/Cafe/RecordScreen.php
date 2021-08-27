@@ -39,6 +39,10 @@ class RecordScreen
 
         $screen->form->addField(
             TableField::make('title', 'Наименование')
+                ->link(function ($model) {
+                    echo Link::make($model->title)->route('admin.cafe.record.edit', ['id' => $model->id])
+                        ->render();
+                })
         );
 
         $screen->form->addField(
@@ -55,13 +59,6 @@ class RecordScreen
 
         $screen->form->addField(
             TableField::make('cafe_category_name', 'Категория')
-        );
-
-        $screen->form->addField(
-            TableField::make('', '')
-                ->link(function ($model) {
-                    echo Link::make('Изменить')->route('admin.cafe.record.edit', ['id' => $model->id])->render();
-                })
         );
 
         //КОЛОНКА УДАЛЕНИЯ
@@ -98,12 +95,12 @@ class RecordScreen
         ]);;
 
         $screen->form->route = route('admin.cafe.record.store');
-        $screen->form->title = 'Добавление блюда';
+        $screen->form->title = 'Создание нового блюда';
 
         $screen->form->columns = self::getFields();
 
         $screen->form->buttons([
-            Button::make('Добавить')->icon('save')->submit(),
+            Button::make('Сохранить')->icon('save')->submit(),
         ]);
 
         $screen->form->build();
@@ -125,15 +122,16 @@ class RecordScreen
         $screen->form->title = 'Редактирование блюда: ' . '"' . $model->title . '"';
 
 
-        $screen->form->route = route('admin.cafe.record.update', $screen->form->source['cafe_record']->id);
+        $screen->form->route = route('admin.cafe.record.update', $model->id);
 
         $screen->form->columns = self::getFields(
-            $screen->form->source['cafe_record']->cafe_category,
-            $screen->form->source['cafe_record']->cafe_type_id
+            $model->cafe_category_id,
+            $model->cafe_type_id
         );
 
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->submit(),
+            Button::make('Удалить')->icon('trash')->route('admin.cafe.record.delete')->canSee($screen->form->isModelExists),
         ]);
 
         $screen->form->build();

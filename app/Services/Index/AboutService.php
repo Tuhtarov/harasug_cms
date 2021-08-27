@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class AboutService implements IAbout
 {
-    public function getAboutItems()
+    public function getAboutItems(bool $forAdmin = false, int $perPage = 15)
     {
+        if ($forAdmin) {
+            return AboutCard::withTrashed()->paginate($perPage);
+        }
+
         return AboutCard::all()->collect();
     }
 

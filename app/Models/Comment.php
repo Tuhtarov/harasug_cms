@@ -11,7 +11,17 @@ class Comment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $casts = [
+        'is_published' => 'boolean',
+    ];
+
     protected $fillable = ['username', 'message', 'email_id', 'phone_id'];
+
+    public function getIsPublishedAttribute()
+    {
+        return $this->attributes['is_published'] == 1 ? 'опубликовано' : 'скрыто';
+    }
 
     /**
      * Возвращает отформатированную дату создания комментария.

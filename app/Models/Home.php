@@ -25,6 +25,11 @@ class Home extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function images() {
         return $this->morphMany(File::class, 'fileable');
     }

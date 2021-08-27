@@ -18,7 +18,6 @@ class CreateGalleriesTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('slug')->unique();
-            $table->dateTime('published_at');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,3 +1,4 @@
+@include('adfm.layouts.listviews.errors')
 <ul class="content-items">
     @if(isset($cards))
         @foreach($cards as $card)
@@ -5,8 +6,8 @@
                 <article class="reservation-card">
                     <div class="reservation-picture">
                         <picture>
-                            <source srcset="dist/img/houses/lev-orel@webp.webp" type="image/webp">
-                            <img src="dist/img/houses/lev-orel@1x.jpg" height="302" width="342"
+                            <source srcset="{{asset('dist/img/houses/lev-orel@webp.webp')}}" type="image/webp">
+                            <img src="{{asset('dist/img/houses/lev-orel@1x.jpg')}}" height="302" width="342"
                                  alt="Интерьер Хакасской Свахи">
                         </picture>
                     </div>
@@ -32,18 +33,26 @@
                         </div>
                         <div class="reservation-body">
                             <p class="reservation-body-text">
-                               {{$card->description}}
+                                {{$card->description}}
                             </p>
                             <div class="reservation-body-calendar">
-                                <img src="dist/img/reservation/calendar.jpg" alt="Календарь" width="253"
+                                <img src="{{asset('dist/img/reservation/calendar.jpg')}}" alt="Календарь" width="253"
                                      height="161">
                             </div>
                         </div>
                         <div class="reservation-form">
-                            <form class="reservation-form-inline" action="#" method="get">
+                            <form class="reservation-form-inline" action="{{route('reservation.check-additional')}}"
+                                  method="POST">
+                                @csrf
+                                <input type="hidden" required name="book[home_id]" value="{{$card->id}}">
+                                <input type="date" required name="book[time_in]" value="{{date('Y-m-d')}}">
+                                <input type="date" required name="book[time_out]">
+                                <input type="hidden" required name="book[title]" value="{{$card->title_full}}">
+                                <input type="hidden" required name="book[max_peoples]" value="{{$card->max_peoples}}">
+
                                 <div class="reservation-form-inline-group">
                                     <label class="reservation-form-inline-label">Количество мест
-                                        <input class="reservation-form-inline-field" name="reservation[qty_peoples]"
+                                        <input class="reservation-form-inline-field" name="book[qty_peoples]"
                                                type="number" max="{{$card->max_peoples}}" min="1"
                                                placeholder="0" value="{{$card->max_peoples}}" required>
                                     </label>

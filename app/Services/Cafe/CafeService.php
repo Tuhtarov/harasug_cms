@@ -248,4 +248,10 @@ class CafeService implements ICafe
     {
         return CafeCategory::findOrFail($categoryId)->update($cafeCategoryData);
     }
+
+    function getSlugCafeTypeByCategoryId(int $categoryId): string
+    {
+        $category = CafeCategory::withTrashed()->with('cafe_type')->findOrFail($categoryId);
+        return $category->cafe_type->slug;
+    }
 }

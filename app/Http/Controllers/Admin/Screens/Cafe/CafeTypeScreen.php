@@ -43,21 +43,13 @@ class CafeTypeScreen
 
         $screen->form->addField(
             TableField::make('name', 'Наименование')
+                ->link(function ($model) {
+                    echo Link::make($model->name)->route('admin.cafe.edit', ['id' => $model->id])->render();
+                })
         );
 
         $screen->form->addField(
             TableField::make('message', 'Оповещение на баннере')
-        );
-
-        $screen->form->addField(
-            TableField::make('', 'Изображение баннера')
-        );
-
-        $screen->form->addField(
-            TableField::make('', '')
-                ->link(function ($model) {
-                    echo Link::make('Изменить')->route('admin.cafe.edit', ['id' => $model->id])->render();
-                })
         );
 
         $screen->form->buttons([
@@ -94,9 +86,6 @@ class CafeTypeScreen
     {
         return [
             Column::make([
-                Input::make('cafe_type.name')
-                    ->title('Наименование')
-                    ->required(),
                 TextArea::make('cafe_type.message')
                     ->title('Оповещение на баннере')
                     ->setDescription('* необязательное поле'),
