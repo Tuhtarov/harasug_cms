@@ -41,7 +41,7 @@ class ConfirmController extends BaseController
                  попробуйте забронировать на другое время, или воспользуйтесь формой для поиска свободных юрт, которая расположена в верхней части сайта.';
             }
 
-            return redirect()->back()->withErrors(['Ошибка проверки' => $message]);
+            return back()->withErrors(['Ошибка проверки' => $message]);
         }
 
         return view('adfm.public.reservation.reservation-additional-confirm', [

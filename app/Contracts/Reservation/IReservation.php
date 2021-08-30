@@ -2,11 +2,13 @@
 
 namespace App\Contracts\Reservation;
 
+use App\Packages\ConfirmCancel\Service\IConfirmCancel;
+
 /**
- * Интерфейс, предназначен для бронирования/поиска доступных домиков.
+ * Интерфейс, предназначен для проверки, поиска, и бронировании свободных домиков.
  * @package App\Contracts\Reservation
  */
-interface IReservation {
+interface IReservation extends IConfirmCancel {
     /**
      * Ищет доступные для бронирования домики.
      * Принимает дату заезда, дату отъезда, и количество человек.
@@ -54,4 +56,5 @@ interface IReservation {
      * @return bool
      */
     function checkHomeOnAvailable(int $homeId, string $timeIn, string $timeOut, int $qtyPeoples) : bool;
+
 }

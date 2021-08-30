@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             SeederNews::class,
             SeederChill::class,
             SeederGallery::class,
-            SeederMessage::class
+            SeederMessage::class,
+            SeederReservation::class
         ]);
     }
 }

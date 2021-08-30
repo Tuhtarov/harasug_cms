@@ -17,7 +17,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->date('time_in');
             $table->date('time_out');
-            $table->smallInteger('qty_child')->nullable();
+            $table->smallInteger('qty_child')->nullable()->default(0);
             $table->smallInteger('qty_old');
             $table->foreignId('home_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');

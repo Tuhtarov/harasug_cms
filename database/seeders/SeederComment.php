@@ -23,7 +23,8 @@ class SeederComment extends Seeder
             'username' => 'Никита Тугужеков',
             'phone_id' => 1,
             'email_id' => 1,
-            'message' => 'Классное место для отдыха со своей девушкой!!'
+            'message' => 'Классное место для отдыха со своей девушкой!!',
+            'is_confirmed' => true
         ]);
         $comment->save();
 
@@ -31,7 +32,8 @@ class SeederComment extends Seeder
             'username' => 'Вячеслав Козловских',
             'phone_id' => 2,
             'email_id' => 2,
-            'message' => 'Лучшие трэп юрты'
+            'message' => 'Лучшие трэп юрты',
+            'is_confirmed' => true
         ]);
         $comment->save();
 
@@ -39,7 +41,8 @@ class SeederComment extends Seeder
             'username' => 'Мария Гербер',
             'phone_id' => 3,
             'email_id' => 3,
-            'message' => 'Понравилась еда в кафе. Прекрасные и живописные места, в добавок и озеро не далеко'
+            'message' => 'Понравилась еда в кафе. Прекрасные и живописные места, в добавок и озеро не далеко',
+            'is_confirmed' => true
         ]);
         $comment->save();
     }

@@ -2,9 +2,10 @@
 
 namespace App\Contracts\Comment;
 
+use App\Packages\ConfirmCancel\Service\IConfirmCancel;
 use Illuminate\Support\Collection;
 
-interface IComment {
+interface IComment extends IConfirmCancel {
 
     /**
      * Возвращает коллекцию Comment.
@@ -18,7 +19,7 @@ interface IComment {
      * @param string $mode значение по умолчанию: public
      * @return Collection
      */
-    public function getComments(string $mode = 'public', int $perPageAdmin = 15, bool $onlyTrashed = false);
+     public function getComments(string $mode = 'public', int $perPageAdmin = 15, bool $onlyTrashed = false);
 
     /**
      * Принимает массив с данными:

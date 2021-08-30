@@ -106,6 +106,12 @@ return [
             'path' => storage_path('logs/reservation.log'),
             'level' => 'debug'
         ],
+
+        'admin_entity_confirm' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/admin_entity_confirm.log'),
+            'level' => 'debug'
+        ],
     ],
 
 ];

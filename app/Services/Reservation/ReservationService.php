@@ -5,11 +5,20 @@ namespace App\Services\Reservation;
 use App\Contracts\Reservation\ReservationBase;
 use App\Models\Home;
 use App\Models\Reservation;
+use App\Packages\ConfirmCancel\Service\ServiceConfirmCancel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use PHPUnit\Exception;
 
 class ReservationService extends ReservationBase
 {
+    use ServiceConfirmCancel;
+
+    protected function getModelWithConfirmed(): Model
+    {
+        return Reservation::getModel();
+    }
+
     //поиск доступных для брони домиков
     function checkAvailableHomes(string $time_in, string $time_out, int $qtyPeoples)
     {
@@ -30,10 +39,11 @@ class ReservationService extends ReservationBase
                 ->orWhere(function ($query) use ($datePeriod) {
                     $query->where('time_in', '<', $datePeriod['start_date'])
                     ->where('time_out', '>', $datePeriod['end_date']);
-                })
-                ->get()->where('is_confirmed', 1)->pluck('home_id')->toArray();
+                })->get()
+                ->where('is_confirmed', 1)
+                ->pluck('home_id')->toArray();
 
-            $availableHomes = Home::get()->whereNotIn('id', $notAvailableHomesId);
+            $availableHomes = Home::get()->whereNotIn('id', $notAvailableHomesId)->where('max_peoples', '>=', $qtyPeoples);
 //            dd($notAvailableHomesId, $availableHomes);
         } catch (Exception $e) {
             Log::channel('reservation')->error('Ошибка при выполнении запроса ' . $e->getMessage() . ' ' . __FILE__);
@@ -65,6 +75,11 @@ class ReservationService extends ReservationBase
         $data['time_in'] = $this->datePeriod['start_date'];
         $data['time_out'] = $this->datePeriod['end_date'];
 
+
+        if(isset($data['max_peoples'])) {
+            unset($data['max_peoples']);
+        }
+
         return $this->storeData($data);
     }
 
@@ -76,7 +91,8 @@ class ReservationService extends ReservationBase
         return Reservation::create($data)->exists();
     }
 
-    //метод проверяет домик на доступность бронирования
+    //метод проверяет домик на доступность бронирования, для этого изначально ищет все свободные дома, а уже потом
+    //среди свободных, ищет дом с указанным id
     function checkHomeOnAvailable(int $homeId, string $timeIn, string $timeOut, int $qtyPeoples): bool
     {
         $availableHomes = $this->checkAvailableHomes($timeIn, $timeOut, $qtyPeoples);

@@ -26,6 +26,8 @@ class BookingRequest extends FormRequest
         return RequestRules::getBookingRules();
     }
 
+
+
     public function messages()
     {
         return [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Screens\Comment;
 
 use App\Helpers\Dev;
 use App\Models\CafeRecord;
+use App\Models\Comment;
 use App\Models\Message;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -59,12 +60,16 @@ class CommentScreen
             TableField::make('created_at', 'Дата отзыва')
         );
 
-//        $screen->form->addField(
-//            TableField::make('', '')
-//            ->link(function ($model) {
-//                echo Link::make('Отредактировать')->route('admin.comment.edit', ['id' => $model->id])->render();
-//            })
-//        );
+        $screen->form->addField(
+            TableField::make('', 'Видимость на сайте')
+            ->link(function (Comment $model) {
+                if ($model->isConfirmed()) {
+                    echo Link::make('Скрывать')->route('admin.comment.confirm-accept', ['id' => $model->id])->render();
+                } else {
+                    echo Link::make('Показывать')->route('admin.comment.confirm-cancel', ['id' => $model->id])->render();
+                }
+            })
+        );
 
         if ($onlyTrashed == true) {
             $screen->form->buttons([

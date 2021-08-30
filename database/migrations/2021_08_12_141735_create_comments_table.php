@@ -17,7 +17,8 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->string('username');
             $table->text('message');
-            $table->timestamps();
+            $table->boolean('is_confirmed')->default(false);
+            $table->timestamp('created_at')->useCurrent();
             $table->softDeletes();
         });
     }

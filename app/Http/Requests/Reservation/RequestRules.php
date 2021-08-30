@@ -14,15 +14,17 @@ class RequestRules
     private static array $home = [
         'book.home_id' => 'required|exists:App\Models\Home,id',
         'book.title' => 'required|exists:App\Models\Home,title_full',
+        'book.max_peoples' => 'integer'
     ];
 
     private static array $homeForBooking = [
         'book.home_id' => 'required|exists:App\Models\Home,id',
+        'book.max_peoples' => 'integer'
     ];
 
     private static array $booking = [
         'book.phone' => 'required|string|max:12|min:12',
-        'book.name' => 'required|string|min:3|max:254'
+        'book.name' => 'required|string|min:3|max:254',
     ];
 
     /**

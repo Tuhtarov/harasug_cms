@@ -11,12 +11,12 @@
 
             <br>
             {{--        max_people--}}
-            <label style="font-size: inherit">Выбранное количество мест: {{$data['max_peoples']}} <br>
+{{--            <label style="font-size: inherit">Выбранное количество мест: {{$data['qty_peop']}} <br>--}}
                 <input id="max_peoples" class="primary-field" style="margin: 5px 0" type="hidden"
                        name="book[max_peoples]"
                        value="{{$data['max_peoples']}}" readonly required>
-            </label>
-            <br>
+{{--            </label>--}}
+{{--            <br>--}}
 
             {{--        date --}}
             <label style="font-size: inherit">Дата заезда: {{$data['time_in']}}<br>
@@ -35,7 +35,7 @@
             {{--        people--}}
             <label style="font-size: inherit">Количество взрослых: <br>
                 <input id="qty_old" class="control-field" min="1" max="{{$data['max_peoples']}}"
-                       style="margin: 5px 0" type="number" name="book[qty_old]"
+                       style="margin: 5px 0" type="number" name="book[qty_old]" required
                         placeholder="0">
             </label>
             <br>
@@ -48,13 +48,13 @@
             </label>
             <br>
             <label>Введите своё имя <br>
-                <input name="book[name]" class="control-field" placeholder="Имя"
+                <input name="book[name]" class="control-field" placeholder="Имя" required
                        type="text" minlength="4" aria-label="Поле для ввода имени"
                        value="{{old('book.name')}}">
             </label>
             <br>
             <label>Введите свой телефон <br>
-                <input name="book[phone]" class="control-field" placeholder="+7(000)-000-00-00"
+                <input name="book[phone]" class="control-field" placeholder="+7(000)-000-00-00" required
                        type="tel" minlength="12" maxlength="12" aria-label="Поле для ввода номера телефона"
                        value="{{old('book.phone')}}">
             </label>
@@ -66,7 +66,7 @@
             </button>
             <label for="buttonSendForm" id="warningForSendButton" style="display: block;
              width: 100%; color: red; opacity: 0">
-                Количество людей не должно превышать {{$data['max_peoples']}}!
+                Количество людей не должно превышать {{$data['max_peoples']}} или быть равным 0!
             </label>
         </div>
     </div>
@@ -90,13 +90,11 @@
         const warningForSendButton = document.querySelector('#warningForSendButton')
 
         function checkFields() {
-            let max = max_qty.getAttribute('value');
-            let qty_child = field_child.value;
-            let qty_old = field_old.value;
+            let max = parseInt(max_qty.value)
+            let qty_child = isNaN(parseInt(field_child.value)) || parseInt(field_child.value) == null ? 0 : parseInt(field_child.value)
+            let qty_old = isNaN(parseInt(field_old.value)) ? 0 : parseInt(field_old.value)
 
             let childIsValid = qty_child <= max - 1;
-
-            console.log('child valid' + childIsValid)
 
             if ((max >= (qty_old + qty_child)) && qty_old != 0 && childIsValid !== false) {
                 //если всё ок, блочим кнопку и выводим предупреждение

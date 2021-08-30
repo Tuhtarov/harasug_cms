@@ -5,14 +5,21 @@ namespace App\Services\Comment;
 use App\Contracts\Comment\IComment;
 use App\Models\Comment;
 use App\Models\Email;
-use App\Models\Message;
 use App\Models\Phone;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Packages\ConfirmCancel\Service\ServiceConfirmCancel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CommentService implements IComment
 {
+    use ServiceConfirmCancel;
+
+    protected function getModelWithConfirmed(): Model
+    {
+        return Comment::getModel();
+    }
+
     private Collection $comments;
 
     /**
@@ -26,7 +33,7 @@ class CommentService implements IComment
     {
         switch ($mode) {
             case 'public':
-                $this->comments = Comment::with(['phone', 'email'])->get()->collect();
+                $this->comments = Comment::where('is_confirmed', true)->with(['phone', 'email'])->get()->collect();
                 break;
             case 'admin':
                 $this->comments = Comment::withTrashed(false)->with(['phone', 'email'])->get()->collect();
@@ -131,5 +138,6 @@ class CommentService implements IComment
     {
         return true;
     }
+
 }
 

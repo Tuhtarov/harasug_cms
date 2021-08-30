@@ -8,6 +8,7 @@ use App\Models\CafeRecord;
 use App\Models\CafeType;
 use Illuminate\Database\Eloquent\Model;
 use Wtolk\Crud\Form\Column;
+use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\MultiFile;
@@ -39,7 +40,7 @@ class CafeTypeScreen
         $screen->form->template('table-list')->source([
             'cafe_types' => $cafe_types
         ]);
-        $screen->form->title = 'Кухни';
+        $screen->form->title = 'Баннеры ресторана';
 
         $screen->form->addField(
             TableField::make('name', 'Наименование')
@@ -87,11 +88,9 @@ class CafeTypeScreen
         return [
             Column::make([
                 TextArea::make('cafe_type.message')
-                    ->title('Оповещение на баннере')
-                    ->setDescription('* необязательное поле'),
-                Input::make('cafe_type.image')
-                    ->title('Изображение баннера')
-                    ->setDescription('* необязательное поле'),
+                    ->title('Оповещение на баннере'),
+                File::make('cafe_type.image')
+                    ->title('Изображение баннера'),
             ])->class('col col-md-6'),
         ];
     }

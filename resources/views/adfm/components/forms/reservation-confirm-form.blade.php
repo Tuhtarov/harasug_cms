@@ -9,6 +9,8 @@
                        required value="{{$data['home_id']}}">
             </label>
             <br>
+            <input class="primary-field" style="margin: 5px 0" type="hidden" name="book[max_peoples]" readonly required
+                   value="{{$data['max_peoples']}}">
             {{--        people--}}
             <label style="font-size: inherit">Количество взрослых: {{$data['qty_old']}} <br>
                 <input class="primary-field" style="margin: 5px 0" type="hidden" name="book[qty_old]" readonly required

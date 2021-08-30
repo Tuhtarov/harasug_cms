@@ -12,15 +12,13 @@ class Comment extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $casts = [
-        'is_published' => 'boolean',
-    ];
+    public $timestamps = false;
 
     protected $fillable = ['username', 'message', 'email_id', 'phone_id'];
 
-    public function getIsPublishedAttribute()
+    public function isConfirmed() : bool
     {
-        return $this->attributes['is_published'] == 1 ? 'опубликовано' : 'скрыто';
+        return (bool) $this->is_confirmed;
     }
 
     /**

@@ -139,9 +139,19 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
     /* Роуты для бронирования. */
     Route::prefix('/reservation')
         ->name('reservation.')
-        ->namespace('App\Http\Controllers\Modules\Reservation')
+        ->namespace('App\Http\Controllers\Admin\Modules\Reservation')
         ->group(function () {
-//            Route::get('/', [AdminCafeController::class, 'index'])->name('index');
+            Route::get('/new', 'IndexController@showNew')->name('index-new');
+            Route::get('/history', 'IndexController@showHistory')->name('index-history');
+            Route::get('/history/trashed', 'IndexController@showTrashed')->name('index-history.trashed');
+            Route::get('/create', 'CreateController')->name('create');
+            Route::post('/restore/{id}', 'RestoreController')->name('restore')->whereNumber('id');
+            Route::get('/confirm/{id}/cancel', 'ConfirmController@cancel')->name('confirm-cancel')->whereNumber('id');
+            Route::get('/confirm/{id}/accept', 'ConfirmController@accept')->name('confirm-accept')->whereNumber('id');
+            Route::get('/edit/{id}', 'EditController')->name('edit')->whereNumber('id');
+            Route::patch('/update/{id}', 'UpdateController')->name('update')->whereNumber('id');
+            Route::delete('/delete/{id}', 'DeleteController')->name('delete')->whereNumber('id');
+            Route::post('/store', 'StoreController')->name('store');
         });
 
     /* Роуты для Галереи. */
@@ -193,6 +203,8 @@ Route::prefix('/admin/public')->name('admin.')->middleware(['web', 'auth'])->gro
         ->group(function () {
             Route::get('/', 'IndexController@withoutTrashed')->name('index');
             Route::get('/trashed', 'IndexController@onlyTrashed')->name('index.trashed');
+            Route::get('/confirm/{id}/cancel', 'ConfirmController@cancel')->name('confirm-cancel')->whereNumber('id');
+            Route::get('/confirm/{id}/accept', 'ConfirmController@accept')->name('confirm-accept')->whereNumber('id');
             Route::delete('/delete/{id}', 'DeleteController')->name('delete');
             Route::patch('/restore/{id}', 'RestoreController')->name('restore');
         });

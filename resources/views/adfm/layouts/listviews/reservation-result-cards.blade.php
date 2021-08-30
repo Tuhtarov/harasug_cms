@@ -1,3 +1,4 @@
+@include('adfm.layouts.listviews.errors')
 <ul class="content-items">
     @if(isset($cards) && $cards->count() > 0)
         @foreach($cards as $card)
@@ -45,6 +46,7 @@
                                 <input type="hidden" value="{{$data['time_out']}}" name="book[time_out]">
                                 <input type="hidden" value="{{$data['qty_child']}}" name="book[qty_child]">
                                 <input type="hidden" value="{{$data['qty_old']}}" name="book[qty_old]">
+                                <input type="hidden" value="{{$card->max_peoples}}" name="book[max_peoples]">
                                 <button class="reservation-form-inline-btn" type="submit">Забронировать</button>
                             </form>
                         </div>
